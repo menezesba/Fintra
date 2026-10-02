@@ -9,21 +9,25 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
 <style>
-:root{--navy:#071a2b;--teal:#0d6b72;--green:#23b26d;--bg:#f4f7f9;--card:#fff;--text:#17212b;--muted:#71808d;--line:#e4eaee}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:92px}
+:root{--navy:#071a2b;--teal:#0d6b72;--green:#23b26d;--bg:#f4f7f9;--card:#fff;--text:#17212b;--muted:#71808d;--line:#e4eaee;--danger:#d94c4c}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:92px}
 header{background:linear-gradient(135deg,#071a2b,#0d5962);color:#fff;padding:22px 18px 24px;border-radius:0 0 24px 24px}
-.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:#fff1;display:grid;place-items:center;font-weight:900;font-size:27px;border:1px solid #ffffff2b}.brand h1{margin:0;font-size:25px}.brand small{opacity:.8}
-.slogan{margin:16px 0 0;font-size:14px;opacity:.9}.balance{margin-top:20px}.balance span{font-size:13px;opacity:.8}.balance strong{display:block;font-size:31px;margin-top:3px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:#fff1;display:grid;place-items:center;font-weight:900;font-size:27px;border:1px solid #ffffff2b}.brand h1{margin:0;font-size:25px}.brand small{opacity:.8}.slogan{margin:16px 0 0;font-size:14px;opacity:.9}.balance{margin-top:20px}.balance span{font-size:13px;opacity:.8}.balance strong{display:block;font-size:31px;margin-top:3px}
 main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 4px 14px #0b1d2a08}.card .icon{font-size:22px}.card small{display:block;color:var(--muted);margin-top:7px}.card strong{display:block;font-size:20px;margin-top:2px}
-.section{margin-top:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.section-title h2{font-size:17px;margin:0}.link{color:var(--teal);font-size:13px;font-weight:700}
-.categories{display:flex;gap:10px;overflow:auto;padding-bottom:5px}.cat{min-width:72px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px 7px;text-align:center}.cat .ci{font-size:24px}.cat small{display:block;font-size:11px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.assistant{background:linear-gradient(145deg,#fff,#f1faf7);border:1px solid #cfe9df;border-radius:20px;padding:15px}.assistant-title{display:flex;align-items:center;gap:10px;font-weight:800}.robot{width:40px;height:40px;border-radius:13px;background:#e0f5eb;display:grid;place-items:center;font-size:23px}.hint{font-size:13px;color:var(--muted);margin:10px 0}
-.chat{display:flex;gap:8px}.chat input{flex:1;border:1px solid var(--line);border-radius:15px;padding:14px;font-size:15px;outline:none}.btn{border:0;border-radius:14px;padding:0 14px;font-weight:800}.mic{background:#071a2b;color:#fff;width:50px;font-size:19px}.send{background:#23b26d;color:#fff}.result{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;display:none}.result b{display:block;margin-bottom:5px}.confirm{display:flex;gap:8px;margin-top:10px}.confirm button{border:0;border-radius:10px;padding:9px 12px;font-weight:700}.ok{background:#23b26d;color:#fff}.cancel{background:#eef2f4}
-.launch{width:100%;margin-top:12px;border:0;background:var(--navy);color:#fff;padding:15px;border-radius:16px;font-size:15px;font-weight:800}
-.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:5}.bottom button{border:0;background:none;padding:8px 2px;color:var(--muted);font-size:11px}.bottom span{display:block;font-size:21px;margin-bottom:2px}.bottom .active{color:var(--teal);font-weight:800}
-.empty{color:var(--muted);font-size:13px;background:#fff;border:1px dashed var(--line);padding:16px;border-radius:15px}
-@media(min-width:721px){body{padding:20px}.app{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--bg)}}
+.section{margin-top:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.section-title h2{font-size:17px;margin:0}.link{color:var(--teal);font-size:13px;font-weight:700;background:none;border:0;padding:4px}
+.categories{display:flex;gap:10px;overflow:auto;padding-bottom:5px}.cat{min-width:88px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px 7px;text-align:center}.cat .ci{font-size:24px}.cat small{display:block;font-size:11px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.assistant{background:linear-gradient(145deg,#fff,#f1faf7);border:1px solid #cfe9df;border-radius:20px;padding:15px}.assistant-title{display:flex;align-items:center;gap:10px;font-weight:800}.robot{width:40px;height:40px;border-radius:13px;background:#e0f5eb;display:grid;place-items:center;font-size:23px}.hint{font-size:13px;color:var(--muted);margin:10px 0}.chat{display:flex;gap:8px}.chat input{flex:1;border:1px solid var(--line);border-radius:15px;padding:14px;font-size:15px;outline:none;min-width:0}.btn{border:0;border-radius:14px;padding:0 14px;font-weight:800}.mic{background:#071a2b;color:#fff;width:50px;font-size:19px}.send{background:#23b26d;color:#fff}.result{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;display:none}.result b{display:block;margin-bottom:5px}.confirm{display:flex;gap:8px;margin-top:10px}.confirm button{border:0;border-radius:10px;padding:9px 12px;font-weight:700}.ok{background:#23b26d;color:#fff}.cancel{background:#eef2f4}
+.launch{width:100%;margin-top:12px;border:0;background:var(--navy);color:#fff;padding:15px;border-radius:16px;font-size:15px;font-weight:800}.empty{color:var(--muted);font-size:13px;background:#fff;border:1px dashed var(--line);padding:16px;border-radius:15px}
+.tx-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:8px;box-shadow:0 3px 10px #0b1d2a06}.tx-card:active{transform:scale(.995)}.tx-top{display:flex;justify-content:space-between;gap:10px}.tx-desc{font-weight:800}.tx-amount{font-weight:900;white-space:nowrap}.income-t{color:#15834e}.expense-t{color:#b43d3d}.tx-meta{color:var(--muted);font-size:12px;margin-top:5px}
+.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:20}.bottom button{border:0;background:none;padding:8px 2px;color:var(--muted);font-size:11px}.bottom span{display:block;font-size:21px;margin-bottom:2px}.bottom .active{color:var(--teal);font-weight:800}
+.view{display:none}.view.active{display:block}.view-title{display:flex;align-items:center;justify-content:space-between;margin:4px 0 14px}.view-title h2{margin:0;font-size:21px}.back{border:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}.mini small{display:block;color:var(--muted)}.mini strong{display:block;margin-top:5px;font-size:19px}.bar{height:10px;background:#e9eef1;border-radius:99px;overflow:hidden;margin-top:9px}.bar i{display:block;height:100%;background:var(--teal);border-radius:99px;width:0}
+.list{display:grid;gap:8px}.row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.row .emoji{font-size:23px}.row strong{display:block}.row small{color:var(--muted)}
+.modal{position:fixed;inset:0;background:#0008;z-index:50;display:none;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;padding:18px 16px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px #0003}.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.sheet-head h3{margin:0;font-size:20px}.close{border:0;background:#eef2f4;border-radius:50%;width:38px;height:38px;font-size:20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}.field.full{grid-column:1/-1}.field label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff;outline:none}.field textarea{min-height:70px;resize:vertical}.type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.type-toggle button{border:1px solid var(--line);background:#f6f8f9;border-radius:13px;padding:11px;font-weight:800}.type-toggle .selected{background:var(--navy);color:#fff;border-color:var(--navy)}.save{width:100%;border:0;background:var(--green);color:#fff;padding:14px;border-radius:14px;font-weight:900;margin-top:5px}.delete{width:100%;border:0;background:#fff0f0;color:var(--danger);padding:12px;border-radius:14px;font-weight:800;margin-top:8px}
+.category-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.category-list button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 5px}.category-list .ci{font-size:23px;display:block}.category-list small{font-size:11px;display:block;margin-top:3px}
+.filter-note{font-size:12px;color:var(--muted);margin:-5px 0 10px}.pill{display:inline-flex;align-items:center;gap:5px;background:#eaf5f2;color:var(--teal);padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800}
+@media(min-width:721px){body{padding:20px}.app{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--bg)}.modal{align-items:center}.sheet{border-radius:24px;max-height:90vh}}
 </style>
 </head>
 <body>
@@ -34,6 +38,7 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
 </header>
 
 <main>
+<section id="homeView" class="view active">
   <div class="cards">
     <div class="card"><div class="icon">📥</div><small>Entradas do mês</small><strong id="income">R$ 0,00</strong></div>
     <div class="card"><div class="icon">📤</div><small>Despesas do mês</small><strong id="expense">R$ 0,00</strong></div>
@@ -54,24 +59,81 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
   </section>
 
   <section class="section">
-    <div class="section-title"><h2>🏷️ Categorias</h2><span class="link">Ver todas</span></div>
+    <div class="section-title"><h2>🏷️ Categorias</h2><button class="link" id="allCategories">Ver todas</button></div>
     <div class="categories" id="categories"></div>
   </section>
 
   <section class="section">
-    <div class="section-title"><h2>🧾 Últimos lançamentos</h2><span class="link">Ver todos</span></div>
+    <div class="section-title"><h2>🧾 Últimos lançamentos</h2><button class="link" id="allTransactions">Ver todos</button></div>
     <div id="transactions" class="empty">Nenhum lançamento ainda. Use o assistente acima para começar.</div>
   </section>
 
   <button class="launch" id="manual">＋ Novo lançamento manual</button>
+</section>
+
+<section id="reportsView" class="view">
+  <div class="view-title"><h2>📊 Relatórios</h2></div>
+  <div class="report-grid">
+    <div class="mini"><small>Entradas</small><strong id="rIncome">R$ 0,00</strong></div>
+    <div class="mini"><small>Despesas</small><strong id="rExpense">R$ 0,00</strong></div>
+    <div class="mini"><small>Saldo</small><strong id="rBalance">R$ 0,00</strong></div>
+    <div class="mini"><small>Lançamentos</small><strong id="rCount">0</strong></div>
+  </div>
+  <div class="section">
+    <div class="section-title"><h2>Por categoria</h2></div>
+    <div id="reportCategories" class="list"></div>
+  </div>
+</section>
+
+<section id="accountsView" class="view">
+  <div class="view-title"><h2>💳 Contas e fontes</h2></div>
+  <div class="empty">As fontes usadas nos lançamentos aparecem aqui automaticamente. Você também pode escolher a fonte ao editar ou criar um lançamento.</div>
+  <div class="section"><div id="accountsList" class="list"></div></div>
+</section>
+
+<section id="configView" class="view">
+  <div class="view-title"><h2>⚙️ Configurações</h2></div>
+  <div class="list">
+    <button class="row" id="exportBtn"><span class="emoji">💾</span><div><strong>Exportar backup</strong><small>Salvar seus lançamentos em JSON</small></div></button>
+    <button class="row" id="importBtn"><span class="emoji">📥</span><div><strong>Restaurar backup</strong><small>Importar um arquivo JSON do Fintra</small></div></button>
+    <button class="row" id="clearBtn"><span class="emoji">🗑️</span><div><strong>Apagar todos os lançamentos</strong><small>Use somente se tiver certeza</small></div></button>
+  </div>
+  <input id="fileInput" type="file" accept=".json,application/json" hidden>
+</section>
 </main>
 
 <nav class="bottom">
-  <button class="active"><span>🏠</span>Início</button>
-  <button><span>📊</span>Relatórios</button>
-  <button><span>💳</span>Contas</button>
-  <button><span>⚙️</span>Config.</button>
+  <button data-view="homeView" class="active"><span>🏠</span>Início</button>
+  <button data-view="reportsView"><span>📊</span>Relatórios</button>
+  <button data-view="accountsView"><span>💳</span>Contas</button>
+  <button data-view="configView"><span>⚙️</span>Config.</button>
 </nav>
+</div>
+
+<div class="modal" id="editModal">
+ <div class="sheet">
+  <div class="sheet-head"><h3 id="modalTitle">Novo lançamento</h3><button class="close" data-close>×</button></div>
+  <div class="type-toggle">
+   <button id="incomeType">📥 Entrada</button><button id="expenseType" class="selected">📤 Despesa</button>
+  </div>
+  <div class="form-grid">
+   <div class="field full"><label>Descrição</label><input id="fDesc" placeholder="Ex.: Supermercado"></div>
+   <div class="field"><label>Valor (R$)</label><input id="fAmount" type="number" step="0.01" inputmode="decimal" placeholder="0,00"></div>
+   <div class="field"><label>Data</label><input id="fDate" type="date"></div>
+   <div class="field"><label>Categoria</label><select id="fCategory"></select></div>
+   <div class="field"><label>Fonte / conta / cartão</label><select id="fMethod"></select></div>
+   <div class="field full"><label>Observação</label><textarea id="fNote" placeholder="Opcional"></textarea></div>
+  </div>
+  <button class="save" id="saveTx">Salvar lançamento</button>
+  <button class="delete" id="deleteTx" style="display:none">Excluir lançamento</button>
+ </div>
+</div>
+
+<div class="modal" id="categoryModal">
+ <div class="sheet">
+  <div class="sheet-head"><h3>🏷️ Todas as categorias</h3><button class="close" data-close>×</button></div>
+  <div id="categoryList" class="category-list"></div>
+ </div>
 </div>
 
 <script>
@@ -80,80 +142,127 @@ const categories=[
  ["🛒","Compras"],["💡","Contas"],["🎬","Lazer"],["👕","Vestuário"],["📱","Tecnologia"],
  ["🏋️","Academia"],["⛽","Combustível"],["🐶","Pet"],["💰","Dívidas"],["📦","Outros"]
 ];
+const methods=["Pix","Dinheiro","Cartão de crédito","Cartão de débito","Transferência","Débito automático","Crediário","Outro"];
 let data=JSON.parse(localStorage.getItem("fintraData")||'{"transactions":[]}');
+if(!Array.isArray(data.transactions))data.transactions=[];
+let editingId=null, editingType="expense", filterCategory=null;
 
-function money(v){return Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function money(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function today(){return new Date().toISOString().slice(0,10)}
+function brDate(iso){if(!iso)return ""; if(/^\\d{2}\\/\\d{2}\\/\\d{4}$/.test(iso))return iso; const p=iso.split("-"); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:iso}
+function save(){localStorage.setItem("fintraData",JSON.stringify(data))}
+function catInfo(name){return categories.find(c=>c[1]===name)||["📦","Outros"]}
+
 function render(){
  const tx=data.transactions;
- const inc=tx.filter(x=>x.type==="income").reduce((a,x)=>a+x.amount,0);
- const exp=tx.filter(x=>x.type==="expense").reduce((a,x)=>a+x.amount,0);
- document.querySelector("#income").textContent=money(inc);
- document.querySelector("#expense").textContent=money(exp);
- document.querySelector("#balance").textContent=money(inc-exp);
+ const inc=tx.filter(x=>x.type==="income").reduce((a,x)=>a+Number(x.amount||0),0);
+ const exp=tx.filter(x=>x.type==="expense").reduce((a,x)=>a+Number(x.amount||0),0);
+ document.querySelector("#income").textContent=money(inc); document.querySelector("#expense").textContent=money(exp); document.querySelector("#balance").textContent=money(inc-exp);
+ document.querySelector("#rIncome").textContent=money(inc);document.querySelector("#rExpense").textContent=money(exp);document.querySelector("#rBalance").textContent=money(inc-exp);document.querySelector("#rCount").textContent=tx.length;
  const box=document.querySelector("#transactions");
- if(!tx.length){box.className="empty";box.textContent="Nenhum lançamento ainda. Use o assistente acima para começar."}
- else{
-   box.className="";
-   box.innerHTML=tx.slice(-5).reverse().map(x=>`<div class="card" style="margin-bottom:8px"><strong>${x.type==="income"?"📥":"📤"} ${x.description}</strong><small>${x.category||"Outros"} · ${x.date} · ${x.method||"Não informado"}</small><strong>${x.type==="income"?"+":"-"} ${money(x.amount)}</strong></div>`).join("");
- }
+ let list=filterCategory?tx.filter(x=>x.category===filterCategory):tx;
+ if(!list.length){box.className="empty";box.innerHTML=filterCategory?`Nenhum lançamento em <b>${filterCategory}</b>.`:"Nenhum lançamento ainda. Use o assistente acima para começar."}
+ else{box.className="";box.innerHTML=list.slice(-8).reverse().map(x=>txHtml(x)).join("")}
+ renderReports(tx);renderAccounts(tx);
+ document.querySelectorAll("[data-tx]").forEach(el=>el.onclick=()=>openEdit(el.dataset.tx));
 }
-document.querySelector("#categories").innerHTML=categories.map(c=>`<div class="cat"><div class="ci">${c[0]}</div><small>${c[1]}</small></div>`).join("");
+function txHtml(x){
+ const info=catInfo(x.category);
+ const sign=x.type==="income"?"+":"-";
+ const cls=x.type==="income"?"income-t":"expense-t";
+ return `<div class="tx-card" data-tx="${x.id}"><div class="tx-top"><div class="tx-desc">${info[0]} ${escapeHtml(x.description||"Sem descrição")}</div><div class="tx-amount ${cls}">${sign} ${money(x.amount)}</div></div><div class="tx-meta">${escapeHtml(x.category||"Outros")} · ${brDate(x.date)} · ${escapeHtml(x.method||"Não informado")}${x.note?" · "+escapeHtml(x.note):""}</div></div>`;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function renderReports(tx){
+ const box=document.querySelector("#reportCategories");const sums={};
+ tx.filter(x=>x.type==="expense").forEach(x=>sums[x.category||"Outros"]=(sums[x.category||"Outros"]||0)+Number(x.amount||0));
+ const arr=Object.entries(sums).sort((a,b)=>b[1]-a[1]);const max=arr[0]?.[1]||1;
+ box.innerHTML=arr.length?arr.map(([name,val])=>{const i=catInfo(name);return `<div class="row"><span class="emoji">${i[0]}</span><div style="flex:1"><strong>${escapeHtml(name)}</strong><small>${money(val)}</small><div class="bar"><i style="width:${Math.max(4,val/max*100)}%"></i></div></div></div>`}).join(""):"<div class='empty'>Ainda não há despesas para analisar.</div>";
+}
+function renderAccounts(tx){
+ const box=document.querySelector("#accountsList");const sums={};tx.forEach(x=>sums[x.method||"Não informado"]=(sums[x.method||"Não informado"]||0)+1);
+ const arr=Object.entries(sums).sort((a,b)=>b[1]-a[1]);
+ box.innerHTML=arr.length?arr.map(([m,n])=>`<div class="row"><span class="emoji">💳</span><div><strong>${escapeHtml(m)}</strong><small>${n} lançamento(s)</small></div></div>`).join(""):"";
+}
+function buildCategories(){
+ document.querySelector("#categories").innerHTML=categories.map(c=>`<button class="cat" data-cat="${c[1]}"><div class="ci">${c[0]}</div><small>${c[1]}</small></button>`).join("");
+ document.querySelector("#categoryList").innerHTML=categories.map(c=>`<button data-cat="${c[1]}"><span class="ci">${c[0]}</span><small>${c[1]}</small></button>`).join("");
+ document.querySelector("#fCategory").innerHTML=categories.map(c=>`<option value="${c[1]}">${c[0]} ${c[1]}</option>`).join("");
+ document.querySelector("#fMethod").innerHTML=methods.map(m=>`<option value="${m}">${m}</option>`).join("");
+ document.querySelectorAll("[data-cat]").forEach(el=>el.onclick=()=>{filterCategory=el.dataset.cat;closeModal("categoryModal");switchView("homeView");render()});
+}
+function openModal(id){document.querySelector("#"+id).classList.add("show")}
+function closeModal(id){document.querySelector("#"+id).classList.remove("show")}
+function resetForm(){
+ editingId=null;editingType="expense";document.querySelector("#modalTitle").textContent="Novo lançamento";document.querySelector("#deleteTx").style.display="none";
+ document.querySelector("#fDesc").value="";document.querySelector("#fAmount").value="";document.querySelector("#fDate").value=today();document.querySelector("#fCategory").value="Outros";document.querySelector("#fMethod").value="Pix";document.querySelector("#fNote").value="";
+ updateTypeButtons();
+}
+function openNew(prefill=null){
+ resetForm();
+ if(prefill){document.querySelector("#modalTitle").textContent="Corrigir lançamento";editingType=prefill.type;document.querySelector("#fDesc").value=prefill.description||"";document.querySelector("#fAmount").value=Number(prefill.amount||0).toFixed(2);document.querySelector("#fDate").value=/^\\d{4}-\\d{2}-\\d{2}$/.test(prefill.date||"")?prefill.date:today();document.querySelector("#fCategory").value=prefill.category||"Outros";document.querySelector("#fMethod").value=methods.includes(prefill.method)?prefill.method:"Outro";document.querySelector("#fNote").value=prefill.note||"";document.querySelector("#deleteTx").style.display="block";editingId=prefill.id;updateTypeButtons();}
+ openModal("editModal");
+}
+function openEdit(id){const tx=data.transactions.find(x=>String(x.id)===String(id));if(tx)openNew(tx)}
+function updateTypeButtons(){document.querySelector("#incomeType").classList.toggle("selected",editingType==="income");document.querySelector("#expenseType").classList.toggle("selected",editingType==="expense")}
+document.querySelector("#incomeType").onclick=()=>{editingType="income";updateTypeButtons()};
+document.querySelector("#expenseType").onclick=()=>{editingType="expense";updateTypeButtons()};
+document.querySelector("#manual").onclick=()=>openNew();
+document.querySelector("#saveTx").onclick=()=>{
+ const amount=Number(String(document.querySelector("#fAmount").value).replace(",","."));
+ if(!amount||amount<0){alert("Informe um valor válido.");return}
+ const tx={id:editingId||Date.now().toString(),type:editingType,description:document.querySelector("#fDesc").value.trim()||"Sem descrição",amount,date:document.querySelector("#fDate").value||today(),category:document.querySelector("#fCategory").value,method:document.querySelector("#fMethod").value,note:document.querySelector("#fNote").value.trim()};
+ if(editingId){const i=data.transactions.findIndex(x=>String(x.id)===String(editingId));if(i>=0)data.transactions[i]=tx}else data.transactions.push(tx);
+ save();closeModal("editModal");render();
+};
+document.querySelector("#deleteTx").onclick=()=>{if(!editingId)return;if(confirm("Excluir este lançamento?")){data.transactions=data.transactions.filter(x=>String(x.id)!==String(editingId));save();closeModal("editModal");render()}};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}));
+document.querySelector("#allCategories").onclick=()=>openModal("categoryModal");
+document.querySelector("#allTransactions").onclick=()=>{filterCategory=null;render();alert("Todos os lançamentos estão exibidos na lista. Toque em qualquer lançamento para editar.")};
 
 function interpret(text){
- const t=text.toLowerCase();
- const m=t.match(/(?:r\$|\b)(\d+(?:[.,]\d{1,2})?)/);
- if(!m)return null;
- let amount=parseFloat(m[1].replace(/\./g,"").replace(",","."));
- if(/recebi|recebimento|salário|salario|ganhei|entrou|renda/.test(t)) type="income"; else type="expense";
- let category="Outros", icon="📦";
- const rules=[
-  [/supermercado|mercado|arroz|feijão|feijao|comida|restaurante|lanche|alimentação|alimentacao/,"Alimentação","🍎"],
-  [/gasolina|combustível|combustivel|posto|abasteci/,"Combustível","⛽"],
-  [/uber|ônibus|onibus|transporte|estacionamento/,"Transporte","🚗"],
-  [/luz|energia|água|agua|internet|telefone|aluguel/,"Contas","💡"],
-  [/farmácia|farmacia|remédio|remedio|médico|medico/,"Saúde","💊"],
-  [/roupa|camisa|calça|calca|vestido/,"Vestuário","👕"],
-  [/academia|musculação|musculacao/,"Academia","🏋️"],
-  [/celular|computador|tecnologia/,"Tecnologia","📱"]
- ];
+ const t=text.toLowerCase();const m=t.match(/(?:r\\$|\\b)(\\d+(?:[.,]\\d{1,2})?)/);if(!m)return null;
+ let amount=parseFloat(m[1].replace(/\\./g,"").replace(",","."));
+ let type=/recebi|recebimento|salário|salario|ganhei|entrou|renda/.test(t)?"income":"expense";
+ let category="Outros",icon="📦";
+ const rules=[[/supermercado|mercado|arroz|feijão|feijao|comida|restaurante|lanche|alimentação|alimentacao/,"Alimentação","🍎"],[/gasolina|combustível|combustivel|posto|abasteci/,"Combustível","⛽"],[/uber|ônibus|onibus|transporte|estacionamento/,"Transporte","🚗"],[/luz|energia|água|agua|internet|telefone|aluguel/,"Contas","💡"],[/farmácia|farmacia|remédio|remedio|médico|medico/,"Saúde","💊"],[/roupa|camisa|calça|calca|vestido/,"Vestuário","👕"],[/academia|musculação|musculacao/,"Academia","🏋️"],[/celular|computador|tecnologia/,"Tecnologia","📱"]];
  for(const r of rules)if(r[0].test(t)){category=r[1];icon=r[2];break}
- let method=/pix/.test(t)?"Pix":/cartão|cartao|crédito|credito/.test(t)?"Cartão":/dinheiro|espécie|especie/.test(t)?"Dinheiro":"";
- let description=text.length>60?text.slice(0,57)+"...":text;
- return {type,amount,category,icon,method,description,date:new Date().toLocaleDateString("pt-BR")};
+ let method=/pix/.test(t)?"Pix":/cartão|cartao|crédito|credito/.test(t)?"Cartão de crédito":/débito|debito/.test(t)?"Cartão de débito":/dinheiro|espécie|especie/.test(t)?"Dinheiro":"Outro";
+ return {type,amount,category,icon,method,description:text.length>60?text.slice(0,57)+"...":text,date:today(),note:""};
 }
 function showResult(){
- const text=document.querySelector("#prompt").value.trim(), out=interpret(text), box=document.querySelector("#result");
+ const text=document.querySelector("#prompt").value.trim(),out=interpret(text),box=document.querySelector("#result");
  if(!out){box.style.display="block";box.innerHTML="Não consegui identificar o valor. Tente algo como: <b>“Gastei R$ 85 no supermercado.”</b>";return}
  box.style.display="block";
- box.innerHTML=`<b>${out.type==="income"?"📥 Entrada":"📤 Despesa"} identificada</b>${out.icon} ${out.category} · ${money(out.amount)}${out.method?" · "+out.method:""}<div class="confirm"><button class="ok" id="confirm">✅ Confirmar</button><button class="cancel" id="edit">✏️ Corrigir</button></div>`;
- document.querySelector("#confirm").onclick=()=>{data.transactions.push(out);localStorage.setItem("fintraData",JSON.stringify(data));box.style.display="none";document.querySelector("#prompt").value="";render()};
- document.querySelector("#edit").onclick=()=>document.querySelector("#prompt").focus();
+ box.innerHTML=`<b>${out.type==="income"?"📥 Entrada":"📤 Despesa"} identificada</b>${out.icon} ${out.category} · ${money(out.amount)} · ${out.method}<div class="confirm"><button class="ok" id="confirm">✅ Confirmar</button><button class="cancel" id="edit">✏️ Corrigir</button></div>`;
+ document.querySelector("#confirm").onclick=()=>{out.id=Date.now().toString();data.transactions.push(out);save();box.style.display="none";document.querySelector("#prompt").value="";render()};
+ document.querySelector("#edit").onclick=()=>openNew(out);
 }
-document.querySelector("#send").onclick=showResult;
-document.querySelector("#prompt").addEventListener("keydown",e=>{if(e.key==="Enter")showResult()});
-document.querySelector("#manual").onclick=()=>alert("A tela completa de lançamento manual será construída na próxima etapa.");
+document.querySelector("#send").onclick=showResult;document.querySelector("#prompt").addEventListener("keydown",e=>{if(e.key==="Enter")showResult()});
 
-let recognition;
-const mic=document.querySelector("#mic");
-if("webkitSpeechRecognition" in window || "SpeechRecognition" in window){
- const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
- recognition=new SR(); recognition.lang="pt-BR"; recognition.interimResults=false;
- recognition.onstart=()=>{mic.textContent="🔴"};
- recognition.onend=()=>{mic.textContent="🎤"};
- recognition.onresult=e=>{document.querySelector("#prompt").value=e.results[0][0].transcript;showResult()};
- mic.onclick=()=>recognition.start();
-}else{
- mic.onclick=()=>alert("O reconhecimento de voz depende do navegador e das permissões de microfone. No Android, use Chrome e permita o acesso ao microfone.");
+function switchView(id){
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.querySelector("#"+id).classList.add("active");
+ document.querySelectorAll(".bottom button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-render();
-</script>
+document.querySelectorAll(".bottom button").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {});
-  });
-}
+document.querySelector("#exportBtn").onclick=()=>{
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="backup_fintra_"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+};
+document.querySelector("#importBtn").onclick=()=>document.querySelector("#fileInput").click();
+document.querySelector("#fileInput").onchange=e=>{
+ const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const obj=JSON.parse(reader.result);if(!Array.isArray(obj.transactions))throw new Error();data=obj;save();render();alert("Backup restaurado com sucesso.");}catch{alert("Arquivo de backup inválido.")}};reader.readAsText(file);e.target.value="";
+};
+document.querySelector("#clearBtn").onclick=()=>{if(confirm("Tem certeza que deseja apagar TODOS os lançamentos? Faça um backup antes.")){data={transactions:[]};save();render()}};
+
+let recognition;const mic=document.querySelector("#mic");
+if("webkitSpeechRecognition" in window || "SpeechRecognition" in window){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;recognition=new SR();recognition.lang="pt-BR";recognition.interimResults=false;recognition.onstart=()=>mic.textContent="🔴";recognition.onend=()=>mic.textContent="🎤";recognition.onresult=e=>{document.querySelector("#prompt").value=e.results[0][0].transcript;showResult()};mic.onclick=()=>{try{recognition.start()}catch(e){}}}
+else mic.onclick=()=>alert("O reconhecimento de voz depende do navegador e das permissões de microfone. No Android, use Chrome e permita o acesso ao microfone.");
+
+buildCategories();render();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{}))}
 </script>
 </body>
 </html>
