@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071a2b">
+<title>Fintra</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--navy:#071a2b;--teal:#0d6b72;--green:#23b26d;--bg:#f4f7f9;--card:#fff;--text:#17212b;--muted:#71808d;--line:#e4eaee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:92px}
+header{background:linear-gradient(135deg,#071a2b,#0d5962);color:#fff;padding:22px 18px 24px;border-radius:0 0 24px 24px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:#fff1;display:grid;place-items:center;font-weight:900;font-size:27px;border:1px solid #ffffff2b}.brand h1{margin:0;font-size:25px}.brand small{opacity:.8}
+.slogan{margin:16px 0 0;font-size:14px;opacity:.9}.balance{margin-top:20px}.balance span{font-size:13px;opacity:.8}.balance strong{display:block;font-size:31px;margin-top:3px}
+main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 4px 14px #0b1d2a08}.card .icon{font-size:22px}.card small{display:block;color:var(--muted);margin-top:7px}.card strong{display:block;font-size:20px;margin-top:2px}
+.section{margin-top:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.section-title h2{font-size:17px;margin:0}.link{color:var(--teal);font-size:13px;font-weight:700}
+.categories{display:flex;gap:10px;overflow:auto;padding-bottom:5px}.cat{min-width:72px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px 7px;text-align:center}.cat .ci{font-size:24px}.cat small{display:block;font-size:11px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.assistant{background:linear-gradient(145deg,#fff,#f1faf7);border:1px solid #cfe9df;border-radius:20px;padding:15px}.assistant-title{display:flex;align-items:center;gap:10px;font-weight:800}.robot{width:40px;height:40px;border-radius:13px;background:#e0f5eb;display:grid;place-items:center;font-size:23px}.hint{font-size:13px;color:var(--muted);margin:10px 0}
+.chat{display:flex;gap:8px}.chat input{flex:1;border:1px solid var(--line);border-radius:15px;padding:14px;font-size:15px;outline:none}.btn{border:0;border-radius:14px;padding:0 14px;font-weight:800}.mic{background:#071a2b;color:#fff;width:50px;font-size:19px}.send{background:#23b26d;color:#fff}.result{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;display:none}.result b{display:block;margin-bottom:5px}.confirm{display:flex;gap:8px;margin-top:10px}.confirm button{border:0;border-radius:10px;padding:9px 12px;font-weight:700}.ok{background:#23b26d;color:#fff}.cancel{background:#eef2f4}
+.launch{width:100%;margin-top:12px;border:0;background:var(--navy);color:#fff;padding:15px;border-radius:16px;font-size:15px;font-weight:800}
+.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:5}.bottom button{border:0;background:none;padding:8px 2px;color:var(--muted);font-size:11px}.bottom span{display:block;font-size:21px;margin-bottom:2px}.bottom .active{color:var(--teal);font-weight:800}
+.empty{color:var(--muted);font-size:13px;background:#fff;border:1px dashed var(--line);padding:16px;border-radius:15px}
+@media(min-width:721px){body{padding:20px}.app{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--bg)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="logo">F</div><div><h1>Fintra</h1><small>Suas finanças na palma da mão.</small></div></div>
+  <div class="balance"><span>Saldo atual</span><strong id="balance">R$ 0,00</strong></div>
+</header>
+
+<main>
+  <div class="cards">
+    <div class="card"><div class="icon">📥</div><small>Entradas do mês</small><strong id="income">R$ 0,00</strong></div>
+    <div class="card"><div class="icon">📤</div><small>Despesas do mês</small><strong id="expense">R$ 0,00</strong></div>
+  </div>
+
+  <section class="section">
+    <div class="section-title"><h2>🤖 Assistente Fintra</h2><span class="link">IA</span></div>
+    <div class="assistant">
+      <div class="assistant-title"><div class="robot">🤖</div><div>Fale ou digite para lançar</div></div>
+      <div class="hint">Ex.: “Gastei 85 reais no supermercado hoje no cartão.”</div>
+      <div class="chat">
+        <input id="prompt" placeholder="O que aconteceu com seu dinheiro?">
+        <button class="btn mic" id="mic" title="Falar">🎤</button>
+        <button class="btn send" id="send">➤</button>
+      </div>
+      <div class="result" id="result"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>🏷️ Categorias</h2><span class="link">Ver todas</span></div>
+    <div class="categories" id="categories"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>🧾 Últimos lançamentos</h2><span class="link">Ver todos</span></div>
+    <div id="transactions" class="empty">Nenhum lançamento ainda. Use o assistente acima para começar.</div>
+  </section>
+
+  <button class="launch" id="manual">＋ Novo lançamento manual</button>
+</main>
+
+<nav class="bottom">
+  <button class="active"><span>🏠</span>Início</button>
+  <button><span>📊</span>Relatórios</button>
+  <button><span>💳</span>Contas</button>
+  <button><span>⚙️</span>Config.</button>
+</nav>
+</div>
+
+<script>
+const categories=[
+ ["🏠","Casa"],["🍎","Alimentação"],["🚗","Transporte"],["🎓","Educação"],["💊","Saúde"],
+ ["🛒","Compras"],["💡","Contas"],["🎬","Lazer"],["👕","Vestuário"],["📱","Tecnologia"],
+ ["🏋️","Academia"],["⛽","Combustível"],["🐶","Pet"],["💰","Dívidas"],["📦","Outros"]
+];
+let data=JSON.parse(localStorage.getItem("fintraData")||'{"transactions":[]}');
+
+function money(v){return Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function render(){
+ const tx=data.transactions;
+ const inc=tx.filter(x=>x.type==="income").reduce((a,x)=>a+x.amount,0);
+ const exp=tx.filter(x=>x.type==="expense").reduce((a,x)=>a+x.amount,0);
+ document.querySelector("#income").textContent=money(inc);
+ document.querySelector("#expense").textContent=money(exp);
+ document.querySelector("#balance").textContent=money(inc-exp);
+ const box=document.querySelector("#transactions");
+ if(!tx.length){box.className="empty";box.textContent="Nenhum lançamento ainda. Use o assistente acima para começar."}
+ else{
+   box.className="";
+   box.innerHTML=tx.slice(-5).reverse().map(x=>`<div class="card" style="margin-bottom:8px"><strong>${x.type==="income"?"📥":"📤"} ${x.description}</strong><small>${x.category||"Outros"} · ${x.date} · ${x.method||"Não informado"}</small><strong>${x.type==="income"?"+":"-"} ${money(x.amount)}</strong></div>`).join("");
+ }
+}
+document.querySelector("#categories").innerHTML=categories.map(c=>`<div class="cat"><div class="ci">${c[0]}</div><small>${c[1]}</small></div>`).join("");
+
+function interpret(text){
+ const t=text.toLowerCase();
+ const m=t.match(/(?:r\$|\b)(\d+(?:[.,]\d{1,2})?)/);
+ if(!m)return null;
+ let amount=parseFloat(m[1].replace(/\./g,"").replace(",","."));
+ if(/recebi|recebimento|salário|salario|ganhei|entrou|renda/.test(t)) type="income"; else type="expense";
+ let category="Outros", icon="📦";
+ const rules=[
+  [/supermercado|mercado|arroz|feijão|feijao|comida|restaurante|lanche|alimentação|alimentacao/,"Alimentação","🍎"],
+  [/gasolina|combustível|combustivel|posto|abasteci/,"Combustível","⛽"],
+  [/uber|ônibus|onibus|transporte|estacionamento/,"Transporte","🚗"],
+  [/luz|energia|água|agua|internet|telefone|aluguel/,"Contas","💡"],
+  [/farmácia|farmacia|remédio|remedio|médico|medico/,"Saúde","💊"],
+  [/roupa|camisa|calça|calca|vestido/,"Vestuário","👕"],
+  [/academia|musculação|musculacao/,"Academia","🏋️"],
+  [/celular|computador|tecnologia/,"Tecnologia","📱"]
+ ];
+ for(const r of rules)if(r[0].test(t)){category=r[1];icon=r[2];break}
+ let method=/pix/.test(t)?"Pix":/cartão|cartao|crédito|credito/.test(t)?"Cartão":/dinheiro|espécie|especie/.test(t)?"Dinheiro":"";
+ let description=text.length>60?text.slice(0,57)+"...":text;
+ return {type,amount,category,icon,method,description,date:new Date().toLocaleDateString("pt-BR")};
+}
+function showResult(){
+ const text=document.querySelector("#prompt").value.trim(), out=interpret(text), box=document.querySelector("#result");
+ if(!out){box.style.display="block";box.innerHTML="Não consegui identificar o valor. Tente algo como: <b>“Gastei R$ 85 no supermercado.”</b>";return}
+ box.style.display="block";
+ box.innerHTML=`<b>${out.type==="income"?"📥 Entrada":"📤 Despesa"} identificada</b>${out.icon} ${out.category} · ${money(out.amount)}${out.method?" · "+out.method:""}<div class="confirm"><button class="ok" id="confirm">✅ Confirmar</button><button class="cancel" id="edit">✏️ Corrigir</button></div>`;
+ document.querySelector("#confirm").onclick=()=>{data.transactions.push(out);localStorage.setItem("fintraData",JSON.stringify(data));box.style.display="none";document.querySelector("#prompt").value="";render()};
+ document.querySelector("#edit").onclick=()=>document.querySelector("#prompt").focus();
+}
+document.querySelector("#send").onclick=showResult;
+document.querySelector("#prompt").addEventListener("keydown",e=>{if(e.key==="Enter")showResult()});
+document.querySelector("#manual").onclick=()=>alert("A tela completa de lançamento manual será construída na próxima etapa.");
+
+let recognition;
+const mic=document.querySelector("#mic");
+if("webkitSpeechRecognition" in window || "SpeechRecognition" in window){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ recognition=new SR(); recognition.lang="pt-BR"; recognition.interimResults=false;
+ recognition.onstart=()=>{mic.textContent="🔴"};
+ recognition.onend=()=>{mic.textContent="🎤"};
+ recognition.onresult=e=>{document.querySelector("#prompt").value=e.results[0][0].transcript;showResult()};
+ mic.onclick=()=>recognition.start();
+}else{
+ mic.onclick=()=>alert("O reconhecimento de voz depende do navegador e das permissões de microfone. No Android, use Chrome e permita o acesso ao microfone.");
+}
+render();
+</script>
+</body>
+</html>
