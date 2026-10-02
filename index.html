@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071a2b">
-<title>Fintra</title>
+<title>Fintra v2.8</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
@@ -23,10 +23,10 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
 .bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:20}.bottom button{border:0;background:none;padding:8px 2px;color:var(--muted);font-size:11px}.bottom span{display:block;font-size:21px;margin-bottom:2px}.bottom .active{color:var(--teal);font-weight:800}
 .view{display:none}.view.active{display:block}.view-title{display:flex;align-items:center;justify-content:space-between;margin:4px 0 14px}.view-title h2{margin:0;font-size:21px}.back{border:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px}
 .report-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}.mini small{display:block;color:var(--muted)}.mini strong{display:block;margin-top:5px;font-size:19px}.bar{height:10px;background:#e9eef1;border-radius:99px;overflow:hidden;margin-top:9px}.bar i{display:block;height:100%;background:var(--teal);border-radius:99px;width:0}
-.list{display:grid;gap:8px}.row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.row .emoji{font-size:23px}.row strong{display:block}.row small{color:var(--muted)}
+.list{display:grid;gap:8px}.config-list .row{text-align:left;justify-content:flex-start}.config-list .row>div{flex:1;text-align:left}.row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.row .emoji{font-size:23px}.row strong{display:block}.row small{color:var(--muted)}
 .modal{position:fixed;inset:0;background:#0008;z-index:50;display:none;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;padding:18px 16px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px #0003}.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.sheet-head h3{margin:0;font-size:20px}.close{border:0;background:#eef2f4;border-radius:50%;width:38px;height:38px;font-size:20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}.field.full{grid-column:1/-1}.field label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff;outline:none}.field textarea{min-height:70px;resize:vertical}.type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.type-toggle button{border:1px solid var(--line);background:#f6f8f9;border-radius:13px;padding:11px;font-weight:800}.type-toggle .selected{background:var(--navy);color:#fff;border-color:var(--navy)}.save{width:100%;border:0;background:var(--green);color:#fff;padding:14px;border-radius:14px;font-weight:900;margin-top:5px}.delete{width:100%;border:0;background:#fff0f0;color:var(--danger);padding:12px;border-radius:14px;font-weight:800;margin-top:8px}
-.category-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.category-list button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 5px}.category-list .ci{font-size:23px;display:block}.category-list small{font-size:11px;display:block;margin-top:3px}
-.filter-note{font-size:12px;color:var(--muted);margin:-5px 0 10px}.pill{display:inline-flex;align-items:center;gap:5px;background:#eaf5f2;color:var(--teal);padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800}
+.category-list{display:grid;grid-template-columns:1fr;gap:8px}.category-list button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 5px}.category-list .ci{font-size:23px;display:block}.category-list small{font-size:11px;display:block;margin-top:3px}.manager-list{display:grid;grid-template-columns:1fr;gap:8px;width:100%}.manager-row{display:flex;align-items:center;gap:10px;width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;min-height:52px}.manager-row .manager-name{flex:1;min-width:0;font-weight:700;overflow-wrap:anywhere}.manager-row .manager-icon{font-size:24px;flex:0 0 32px;text-align:center}.manager-row .manager-actions{display:flex;gap:6px;flex:0 0 auto}.manager-row .manager-actions button{border:1px solid var(--line);background:#f7f9fa;border-radius:10px;min-width:42px;min-height:42px;padding:6px}.source-new{margin-top:7px}.source-help{font-size:11px;color:var(--muted);margin-top:4px}.source-icon{font-size:24px;flex:0 0 38px;text-align:center}.source-icon-glyph{display:inline-flex;width:32px;height:24px;align-items:center;justify-content:center;border-radius:7px;font-size:18px;font-weight:700;line-height:1}.source-icon-glyph.credit{position:relative;background:#2563eb;color:#fff;border:1px solid #1d4ed8;width:32px;height:22px;border-radius:5px;font-size:0;box-shadow:inset 0 5px 0 #60a5fa}.source-icon-glyph.credit:after{content:"";position:absolute;left:5px;bottom:4px;width:8px;height:3px;border-radius:2px;background:#fff}.source-icon-glyph.debit{position:relative;background:#16a34a;color:#fff;border:1px solid #15803d;width:32px;height:22px;border-radius:5px;font-size:0;box-shadow:inset 0 5px 0 #4ade80}.source-icon-glyph.debit:after{content:"";position:absolute;left:5px;bottom:4px;width:8px;height:3px;border-radius:2px;background:#fff}.source-icon-glyph.pix{background:#e9fbf7;color:#0f9f82;border:1px solid #7dd3c0}.source-icon-glyph.cash{background:#fff8e7;color:#a16207;border:1px solid #fcd34d}.source-dropdown{position:relative;width:100%}.source-dropdown-btn{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff;display:flex;align-items:center;gap:10px;text-align:left;min-height:48px}.source-dropdown-btn:after{content:"▾";margin-left:auto;color:var(--muted)}.source-dropdown-menu{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:80;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 10px 24px #0002;overflow:hidden;display:none;max-height:260px;overflow-y:auto}.source-dropdown.open .source-dropdown-menu{display:block}.source-option{width:100%;border:0;border-bottom:1px solid var(--line);background:#fff;padding:11px 12px;display:flex;align-items:center;gap:10px;text-align:left;font-size:15px}.source-option:last-child{border-bottom:0}.source-option:hover,.source-option.selected{background:#f3f7f8}.source-option .source-icon-glyph{flex:0 0 32px}.source-option .source-option-name{font-weight:600}.source-manage{margin-top:7px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;font-size:12px;cursor:pointer}.category-manage{margin-top:7px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;font-size:12px;cursor:pointer}.category-custom{margin-top:7px}
+.shopping-row{display:grid;grid-template-columns:auto 1fr 105px auto;gap:8px;align-items:center;width:100%;border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff;transition:.15s}.shopping-row.in-cart{background:#eaf8f1;border-color:#78c99d}.shopping-row input[type="checkbox"]{width:22px;height:22px;accent-color:#23b26d}.shopping-row .shop-name{font-weight:800;min-width:0;overflow-wrap:anywhere}.shopping-row .shop-cat{font-size:11px;color:var(--muted);margin-top:2px}.shopping-row .shop-price{width:105px;border:1px solid var(--line);border-radius:10px;padding:9px;text-align:right}.shopping-row .shop-actions{display:flex;gap:5px}.shopping-row .shop-actions button{border:1px solid var(--line);background:#f7f9fa;border-radius:10px;min-width:40px;min-height:40px}.scan-img{max-width:100%;max-height:280px;object-fit:contain;border-radius:14px;border:1px solid var(--line);display:block;margin:auto}.filter-note{font-size:12px;color:var(--muted);margin:-5px 0 10px}.pill{display:inline-flex;align-items:center;gap:5px;background:#eaf5f2;color:var(--teal);padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800}
 @media(min-width:721px){body{padding:20px}.app{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--bg)}.modal{align-items:center}.sheet{border-radius:24px;max-height:90vh}}
 </style>
 </head>
@@ -69,6 +69,9 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
   </section>
 
   <button class="launch" id="manual">＋ Novo lançamento manual</button>
+  <button class="launch" id="shoppingBtn" style="background:#0d6b72">🛒 Lista de compras <span id="cartBadge" style="float:right;background:#23b26d;padding:2px 8px;border-radius:99px;font-size:12px">0</span></button>
+  <button class="launch" id="scanPurchaseBtn" style="background:#23b26d">📷 Fotografar / importar lista de compras</button>
+  <input id="purchaseImageInput" type="file" accept="image/*" hidden>
 </section>
 
 <section id="reportsView" class="view">
@@ -93,9 +96,11 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
 
 <section id="configView" class="view">
   <div class="view-title"><h2>⚙️ Configurações</h2></div>
-  <div class="list">
+  <div class="list config-list">
     <button class="row" id="exportBtn"><span class="emoji">💾</span><div><strong>Exportar backup</strong><small>Salvar seus lançamentos em JSON</small></div></button>
     <button class="row" id="importBtn"><span class="emoji">📥</span><div><strong>Restaurar backup</strong><small>Importar um arquivo JSON do Fintra</small></div></button>
+    <button class="row" id="helpBtn"><span class="emoji">❓</span><div><strong>Ajuda</strong><small>Veja como usar cada recurso do Fintra</small></div></button>
+    <button class="row" id="aboutBtn"><span class="emoji">ℹ️</span><div><strong>Sobre o Fintra</strong><small>Versão e informações do aplicativo</small></div></button>
     <button class="row" id="clearBtn"><span class="emoji">🗑️</span><div><strong>Apagar todos os lançamentos</strong><small>Use somente se tiver certeza</small></div></button>
   </div>
   <input id="fileInput" type="file" accept=".json,application/json" hidden>
@@ -120,8 +125,8 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
    <div class="field full"><label>Descrição</label><input id="fDesc" placeholder="Ex.: Supermercado"></div>
    <div class="field"><label>Valor (R$)</label><input id="fAmount" type="text" inputmode="numeric" autocomplete="off" placeholder="0,00"></div>
    <div class="field"><label>Data</label><input id="fDate" type="date"></div>
-   <div class="field"><label>Categoria</label><select id="fCategory"></select></div>
-   <div class="field"><label>Fonte / conta / cartão</label><select id="fMethod"></select></div>
+   <div class="field"><label id="categoryLabel">Categoria da despesa</label><select id="fCategory"></select><input id="fCategoryCustom" class="category-custom" placeholder="Digite a nova categoria" style="display:none"><button type="button" id="manageCategories" class="category-manage">⚙️ Gerenciar categorias</button></div>
+   <div class="field"><label id="sourceLabel">Fonte / conta / cartão</label><select id="fMethod" style="display:none"></select><div id="sourceDropdown" class="source-dropdown"><button type="button" id="sourceDropdownBtn" class="source-dropdown-btn"></button><div id="sourceDropdownMenu" class="source-dropdown-menu"></div></div><input id="fSourceCustom" class="source-new" placeholder="Digite uma nova fonte" style="display:none"><div id="sourceHelp" class="source-help" style="display:none">Use as opções prontas (Pix, transferência etc.). Em <b>Outro</b>, você pode cadastrar uma fonte personalizada.</div><button type="button" id="manageSources" class="source-manage">⚙️ Gerenciar fontes</button></div>
    <div class="field full"><label>Observação</label><textarea id="fNote" placeholder="Opcional"></textarea></div>
   </div>
   <button class="save" id="saveTx">Salvar lançamento</button>
@@ -129,29 +134,146 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
  </div>
 </div>
 
-<div class="modal" id="categoryModal">
+<div class="modal" id="sourcesModal">
  <div class="sheet">
-  <div class="sheet-head"><h3>🏷️ Todas as categorias</h3><button class="close" data-close>×</button></div>
-  <div id="categoryList" class="category-list"></div>
+  <div class="sheet-head"><h3 id="sourcesModalTitle">⚙️ Fontes</h3><button class="close" data-close>×</button></div>
+  <div id="sourcesList" class="manager-list"></div>
+  <button type="button" id="addSourceBtn" class="save" style="margin:10px 0 0">＋ Nova fonte</button>
+  <div class="source-help">Aqui você pode editar, excluir e adicionar fontes desta aba. As listas de recebimento e despesa são independentes.</div>
  </div>
 </div>
 
+<div class="modal" id="categoryModal">
+ <div class="sheet">
+  <div class="sheet-head"><h3 id="categoryModalTitle">🏷️ Categorias</h3><button class="close" data-close>×</button></div>
+  <div class="type-toggle" style="margin-bottom:10px"><button type="button" id="manageIncomeCats">📥 Recebimentos</button><button type="button" id="manageExpenseCats" class="selected">📤 Despesas</button></div>
+  <button type="button" id="addCategoryBtn" class="save" style="margin:0 0 10px">＋ Nova categoria</button>
+  <div id="categoryList" class="manager-list"></div>
+  <div class="source-help">A lista acima mostra <b>todas as categorias</b> da aba selecionada. Toque em 📥 Recebimentos ou 📤 Despesas para alternar entre as duas listas. Cada categoria fica em uma linha para facilitar o uso no celular. Você pode renomear, excluir ou criar categorias novas.</div>
+ </div>
+</div>
+
+<div class="modal" id="shoppingModal">
+ <div class="sheet">
+  <div class="sheet-head"><h3>🛒 Lista de compras</h3><button class="close" data-close>×</button></div>
+  <div class="assistant" style="margin-bottom:12px">
+   <div class="assistant-title"><div class="robot">🛒</div><div>Monte sua compra e acompanhe o carrinho</div></div>
+   <div class="hint">Marque os itens comprados e informe o preço. O valor do carrinho é atualizado automaticamente.</div>
+   <div style="display:grid;grid-template-columns:1fr 110px;gap:8px">
+    <input id="shoppingItemName" placeholder="Ex.: Arroz 5 kg">
+    <input id="shoppingItemPrice" inputmode="numeric" placeholder="0,00">
+   </div>
+   <button class="save" id="addShoppingItem" style="margin-top:8px">＋ Adicionar item</button>
+  </div>
+  <div id="shoppingList" class="manager-list"></div>
+  <div class="card" style="margin-top:10px;text-align:left">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><strong>🛒 No carrinho</strong><strong id="cartTotal">R$ 0,00</strong></div>
+    <small id="cartCountText">0 itens selecionados</small>
+    <div id="cartList" style="margin-top:8px;display:grid;gap:6px"></div>
+  </div>
+  <button class="save" id="addCartToExpenses" style="margin-top:10px">💸 Adicionar carrinho às despesas</button>
+  <div class="source-help" style="margin-top:8px">Marque a caixinha para colocar o item no carrinho. Você pode informar o preço mesmo sem marcar. Se desistir de um item, desmarque: ele sai do carrinho, o total diminui e o item volta para a lista em branco.</div>
+ </div>
+</div>
+
+<div class="modal" id="scanModal">
+ <div class="sheet">
+  <div class="sheet-head"><h3>📷 Importar lista de compras</h3><button class="close" data-close>×</button></div>
+  <div id="scanPreview" class="empty">Escolha uma foto, print ou imagem da lista.</div>
+  <div class="source-help" style="margin:10px 0">A imagem será usada para identificar itens, preços e categorias. A confirmação será feita antes de adicionar à sua lista.</div>
+  <button class="save" id="scanAnalyzeBtn">🤖 Analisar imagem com IA</button>
+  <div id="scanStatus" class="result" style="display:none"></div>
+  <div style="margin-top:10px;text-align:left" class="card">
+   <strong>📝 Alternativa enquanto a IA é conectada</strong>
+   <small style="display:block;margin-top:6px">Você também pode colar ou digitar os itens abaixo no Assistente Fintra e depois adicioná-los à lista de compras.</small>
+  </div>
+ </div>
+</div>
+
+<div class="modal" id="helpModal">
+ <div class="sheet">
+  <div class="sheet-head"><h3>❓ Ajuda do Fintra</h3><button class="close" data-close>×</button></div>
+  <div class="list config-list">
+   <div class="row"><span class="emoji">🏠</span><div><strong>Início</strong><small>Mostra saldo, entradas, despesas, categorias e lançamentos recentes.</small></div></div>
+   <div class="row"><span class="emoji">➕</span><div><strong>Novo lançamento</strong><small>Escolha Entrada ou Despesa, informe descrição, valor, data, categoria e fonte/forma.</small></div></div>
+   <div class="row"><span class="emoji">🏷️</span><div><strong>Categorias</strong><small>Recebimentos e despesas têm listas separadas. Você pode adicionar, editar e excluir categorias.</small></div></div>
+   <div class="row"><span class="emoji">💳</span><div><strong>Fontes</strong><small>Recebimentos e despesas têm suas próprias listas de fontes. É possível adicionar, editar e excluir.</small></div></div>
+   <div class="row"><span class="emoji">🤖</span><div><strong>Assistente Fintra</strong><small>Digite ou fale um lançamento para o assistente identificar valor, tipo, categoria e forma quando possível.</small></div></div>
+   <div class="row"><span class="emoji">🛒</span><div><strong>Lista de compras</strong><small>Marque o que comprou, informe os preços e acompanhe o total do carrinho. Depois envie os itens marcados para as despesas.</small></div></div>
+   <div class="row"><span class="emoji">📷</span><div><strong>Foto / print da compra</strong><small>Importe uma imagem de cupom ou lista. A análise por IA será conectada por um serviço seguro para identificar itens, valores e categorias antes da confirmação.</small></div></div>
+   <div class="row"><span class="emoji">📊</span><div><strong>Relatórios</strong><small>Consulte totais e despesas por categoria.</small></div></div>
+   <div class="row"><span class="emoji">💾</span><div><strong>Backup</strong><small>Exporte seus dados para um arquivo JSON e restaure quando precisar.</small></div></div>
+  </div>
+ </div>
+</div>
+<div class="modal" id="aboutModal">
+ <div class="sheet">
+  <div class="sheet-head"><h3>ℹ️ Sobre o Fintra</h3><button class="close" data-close>×</button></div>
+  <div class="card" style="text-align:left">
+   <div style="font-size:30px;font-weight:900;color:var(--teal)">Fintra</div>
+   <p style="margin:6px 0 12px">Suas finanças na palma da mão.</p>
+   <div class="row"><span class="emoji">📱</span><div><strong>Versão</strong><small>2.6</small></div></div>
+   <div class="row" style="margin-top:8px"><span class="emoji">🔒</span><div><strong>Dados</strong><small>Esta versão mantém os dados localmente no dispositivo. Faça backups regularmente.</small></div></div>
+  </div>
+ </div>
+</div>
 <script>
-const categories=[
+const defaultExpenseCategories=[
  ["🏠","Casa"],["🍎","Alimentação"],["🚗","Transporte"],["🎓","Educação"],["💊","Saúde"],
  ["🛒","Compras"],["💡","Contas"],["🎬","Lazer"],["👕","Vestuário"],["📱","Tecnologia"],
  ["🏋️","Academia"],["⛽","Combustível"],["🐶","Pet"],["💰","Dívidas"],["📦","Outros"]
 ];
-const methods=["Pix","Dinheiro","Cartão de crédito","Cartão de débito","Transferência","Débito automático","Crediário","Outro"];
-let data=JSON.parse(localStorage.getItem("fintraData")||'{"transactions":[]}');
+const defaultIncomeCategories=[
+ ["💼","Salário"],["⏱️","Horas extras"],["🎓","Aulas / Docência"],["🧾","Consultoria"],["🛠️","Serviços"],
+ ["🛍️","Vendas"],["↩️","Reembolso"],["📈","Rendimentos"],["💰","Outros recebimentos"]
+];
+const defaultSources=["Pix","Dinheiro","Cartão de crédito","Cartão de débito","Transferência","Débito automático","Crediário"];
+const methods=[...defaultSources,"Outro"];
+const defaultSourceIcons={"Pix":"💠","Dinheiro":"💵","Cartão de crédito":"💳","Cartão de débito":"💳","Transferência":"🔄","Débito automático":"🏦","Crediário":"🧾","Outro":"➕"};
+function sourceIconClass(name){const t=normalizeKey(name);if(/cartao de credito/.test(t))return "credit";if(/cartao de debito/.test(t))return "debit";if(/^pix$/.test(t))return "pix";if(/dinheiro|cash|especie/.test(t))return "cash";return "";}
+function sourceIconHtml(type,name){const cls=sourceIconClass(name);const icon=sourceIcon(type,name);if(cls==="credit")return `<span class="source-icon-glyph credit" aria-label="Cartão de crédito"></span>`;if(cls==="debit")return `<span class="source-icon-glyph debit" aria-label="Cartão de débito"></span>`;return `<span class="source-icon-glyph ${cls}">${icon}</span>`;}
+function sourceIconText(type,name){return `${sourceIcon(type,name)} ${name}`;}
+let data=JSON.parse(localStorage.getItem("fintraData")||'{}');
 if(!Array.isArray(data.transactions))data.transactions=[];
+if(!Array.isArray(data.shoppingItems))data.shoppingItems=[];
+if(!data.shoppingCategoryMemory || typeof data.shoppingCategoryMemory!=='object')data.shoppingCategoryMemory={};
+if(!data.incomeSourceIcons || typeof data.incomeSourceIcons!=='object')data.incomeSourceIcons={};
+if(!data.expenseSourceIcons || typeof data.expenseSourceIcons!=='object')data.expenseSourceIcons={};
+function normalizeKey(s){return String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function iconForSource(name){
+ const t=normalizeKey(name);
+ const rules=[
+  [/^pix$/,'💠'],[/dinheiro|cash|especie/,'💵'],[/cartao de credito|credito/,'💳'],[/cartao de debito|debito/,'💳'],[/transferencia|ted|doc/,'🔄'],[/debito automatico/,'🏦'],[/crediario|parcelado|carn[eê]/,'🧾'],[/conta corrente|conta bancaria|banco/,'🏦'],[/carteira/,'👛'],[/nubank|inter|itau|ita[uú]|bradesco|santander|caixa/,'🏦'],[/vale|ticket|alimentacao/,'🎫'],[/boleto/,'🧾'],[/cheque/,'📝'],[/outro/,'➕']
+ ];
+ for(const [re,icon] of rules)if(re.test(t))return icon;
+ return '💰';
+}
+function sourceIcon(type,name){const key=type==='income'?'incomeSourceIcons':'expenseSourceIcons';return data[key]?.[name]||defaultSourceIcons[name]||iconForSource(name);}
+function rememberShoppingCategory(name,category,icon){const k=normalizeKey(name);if(!k||!category)return;data.shoppingCategoryMemory[k]={category,icon:icon||iconForCategory(category,'expense')};}
+function rememberedShoppingCategory(name){return data.shoppingCategoryMemory?.[normalizeKey(name)]||null;}
+
+function ensureSources(type){
+ const key=type==="income"?"incomeSources":"expenseSources";
+ const existing=Array.isArray(data[key])?data[key]:[];
+ const merged=[...defaultSources,...existing.filter(x=>x&&x!=="Outro")];
+ data[key]=merged.filter((x,i,a)=>a.findIndex(y=>y.toLowerCase()===x.toLowerCase())===i);
+ return data[key];
+}
+ensureSources("income");ensureSources("expense");
+if(!Array.isArray(data.expenseCategories))data.expenseCategories=defaultExpenseCategories.map(x=>[...x]);
+if(!Array.isArray(data.incomeCategories))data.incomeCategories=defaultIncomeCategories.map(x=>[...x]);
+let categories=data.expenseCategories;
+let incomeCategories=data.incomeCategories;
 let editingId=null, editingType="expense", filterCategory=null;
+let selectedCategoryByType={expense:"Outros",income:"Salário"};
+let selectedMethodByType={expense:"Pix",income:"Pix"};
+let categoryManagerType="expense";
 
 function money(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
 function today(){return new Date().toISOString().slice(0,10)}
 function brDate(iso){if(!iso)return ""; if(/^\d{2}\/\d{2}\/\d{4}$/.test(iso))return iso; const p=iso.split("-"); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:iso}
 function save(){localStorage.setItem("fintraData",JSON.stringify(data))}
-function catInfo(name){return categories.find(c=>c[1]===name)||["📦","Outros"]}
+function catInfo(name){return categories.find(c=>c[1]===name)||incomeCategories.find(c=>c[1]===name)||["📦","Outros"]}
 
 function render(){
  const tx=data.transactions;
@@ -184,13 +306,183 @@ function renderAccounts(tx){
  const arr=Object.entries(sums).sort((a,b)=>b[1]-a[1]);
  box.innerHTML=arr.length?arr.map(([m,n])=>`<div class="row"><span class="emoji">💳</span><div><strong>${escapeHtml(m)}</strong><small>${n} lançamento(s)</small></div></div>`).join(""):"";
 }
-function buildCategories(){
- document.querySelector("#categories").innerHTML=categories.map(c=>`<button class="cat" data-cat="${c[1]}"><div class="ci">${c[0]}</div><small>${c[1]}</small></button>`).join("");
- document.querySelector("#categoryList").innerHTML=categories.map(c=>`<button data-cat="${c[1]}"><span class="ci">${c[0]}</span><small>${c[1]}</small></button>`).join("");
- document.querySelector("#fCategory").innerHTML=categories.map(c=>`<option value="${c[1]}">${c[0]} ${c[1]}</option>`).join("");
- document.querySelector("#fMethod").innerHTML=methods.map(m=>`<option value="${m}">${m}</option>`).join("");
- document.querySelectorAll("[data-cat]").forEach(el=>el.onclick=()=>{filterCategory=el.dataset.cat;closeModal("categoryModal");switchView("homeView");render()});
+function categoryListFor(type){
+ return type==="income"?incomeCategories:categories;
 }
+function otherCategoryName(type){return type==="income"?"Outros recebimentos":"Outros"}
+function iconForCategory(name,type){
+ const t=String(name||"").toLowerCase();
+ const rules=type==="income"?[
+  [/sal[aá]rio/ ,"💼"],[/hora.?extra/ ,"⏱️"],[/aula|doc[eê]ncia|professor|ensino/ ,"🎓"],[/consultor/ ,"🧾"],[/servi[cç]o|freela/ ,"🛠️"],[/vend/ ,"🛍️"],[/reembols/ ,"↩️"],[/rendimento|juros|invest/ ,"📈"],[/presente/ ,"🎁"],[/transfer/ ,"🏦"],[/aluguel|renda de im[oó]vel/ ,"🏠"]
+ ]:[
+  [/casa|aluguel|moradia/ ,"🏠"],[/alimenta|mercado|supermercado|restaurante|comida/ ,"🍎"],[/transport|uber|[oô]nibus|taxi/ ,"🚗"],[/educa|escola|curso|faculdade/ ,"🎓"],[/sa[uú]de|farm[aá]cia|m[eé]dico/ ,"💊"],[/compras|loja/ ,"🛒"],[/conta|luz|[aá]gua|internet|telefone/ ,"💡"],[/lazer|cinema|viagem|festa/ ,"🎬"],[/vestu[aá]rio|roupa|cal[cç]a|camisa/ ,"👕"],[/tecnolog|celular|computador/ ,"📱"],[/academia|muscula[cç][aã]o|fitness/ ,"🏋️"],[/combust[ií]vel|gasolina|[aá]lcool|posto/ ,"⛽"],[/pet|cachorro|gato/ ,"🐶"],[/d[ií]vida|empr[eé]stimo|financiamento/ ,"💰"]
+ ];
+ for(const [re,icon] of rules) if(re.test(t)) return icon;
+ return type==="income"?"💰":"📦";
+}
+function buildCategories(){
+ const visible=categoryListFor("expense");
+ document.querySelector("#categories").innerHTML=visible.map(c=>`<button class="cat" data-cat="${escapeHtml(c[1])}" data-cat-type="expense"><div class="ci">${c[0]}</div><small>${escapeHtml(c[1])}</small></button>`).join("");
+ renderCategoryManager();
+ populateFormOptions();
+ document.querySelectorAll("#categories [data-cat]").forEach(el=>el.onclick=()=>{filterCategory=el.dataset.cat;switchView("homeView");render()});
+}
+function sourcesFor(type){return ensureSources(type)}
+function populateFormOptions(){
+ const list=categoryListFor(editingType);
+ const cat=document.querySelector("#fCategory");
+ const previous=selectedCategoryByType[editingType];
+ cat.innerHTML=list.map(c=>`<option value="${escapeHtml(c[1])}">${c[0]} ${escapeHtml(c[1])}</option>`).join("");
+ if(previous && list.some(c=>c[1]===previous)) cat.value=previous;
+ else if(list.length) { cat.value=list[0][1]; selectedCategoryByType[editingType]=cat.value; }
+ const method=document.querySelector("#fMethod");
+ const custom=sourcesFor(editingType).filter(Boolean);
+ method.innerHTML=custom.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("")+`<option value="Outro">Outro</option>`;
+ if(editingType==="income") {
+   document.querySelector("#categoryLabel").textContent="Categoria do recebimento";
+   document.querySelector("#sourceLabel").textContent="Fonte / forma de recebimento";
+   document.querySelector("#sourceHelp").style.display="block";
+ } else {
+   document.querySelector("#categoryLabel").textContent="Categoria da despesa";
+   document.querySelector("#sourceLabel").textContent="Fonte / conta / cartão";
+   document.querySelector("#sourceHelp").style.display="block";
+ }
+ const savedMethod=selectedMethodByType[editingType];
+ if(savedMethod && [...method.options].some(o=>o.value===savedMethod)) method.value=savedMethod;
+ else if(method.options.length){ method.value=method.options[0].value; selectedMethodByType[editingType]=method.value; }
+ renderSourceDropdown();
+ toggleCustomSource();
+ toggleCustomCategory();
+}
+function renderSourceDropdown(){
+ const sel=document.querySelector("#fMethod"), wrap=document.querySelector("#sourceDropdown"), btn=document.querySelector("#sourceDropdownBtn"), menu=document.querySelector("#sourceDropdownMenu");
+ if(!sel||!wrap||!btn||!menu)return;
+ const opts=[...sel.options];
+ menu.innerHTML=opts.map(o=>`<button type="button" class="source-option${o.value===sel.value?' selected':''}" data-source-value="${escapeHtml(o.value)}">${o.value==="Outro"?'<span class="source-icon-glyph">➕</span>':sourceIconHtml(editingType,o.value)}<span class="source-option-name">${escapeHtml(o.value)}</span></button>`).join("");
+ const current=sel.value||opts[0]?.value||"";
+ btn.innerHTML=current==="Outro"?'<span class="source-icon-glyph">➕</span><span>Outro</span>':`${sourceIconHtml(editingType,current)}<span>${escapeHtml(current)}</span>`;
+ menu.querySelectorAll("[data-source-value]").forEach(b=>b.onclick=()=>{sel.value=b.dataset.sourceValue;selectedMethodByType[editingType]=sel.value;wrap.classList.remove("open");toggleCustomSource();renderSourceDropdown();sel.dispatchEvent(new Event("change"));});
+ btn.onclick=()=>wrap.classList.toggle("open");
+ if(!window._sourceDropBound){document.addEventListener("click",e=>{if(!e.target.closest("#sourceDropdown"))document.querySelector("#sourceDropdown")?.classList.remove("open")});window._sourceDropBound=true;}
+}
+function toggleCustomSource(){
+ const isNew=document.querySelector("#fMethod").value==="Outro";
+ document.querySelector("#fSourceCustom").style.display=isNew?"block":"none";
+ document.querySelector("#fSourceCustom").placeholder=isNew?(editingType==="income"?"Ex.: Prefeitura, Escola, Cliente":"Ex.: Nubank, Conta corrente, Carteira"):"Digite uma nova fonte";
+}
+function toggleCustomCategory(){
+ const other=otherCategoryName(editingType);
+ const isOther=document.querySelector("#fCategory").value===other;
+ const input=document.querySelector("#fCategoryCustom");
+ input.style.display=isOther?"block":"none";
+ input.placeholder=editingType==="income"?"Ex.: Aposentadoria, Aluguel, Presente recebido":"Ex.: Oficina, Condomínio, Viagem";
+}
+document.querySelector("#fCategory").addEventListener("change",()=>{selectedCategoryByType[editingType]=document.querySelector("#fCategory").value;toggleCustomCategory()});
+document.querySelector("#fMethod").addEventListener("change",()=>{selectedMethodByType[editingType]=document.querySelector("#fMethod").value;toggleCustomSource()});
+document.querySelector("#manageSources").onclick=()=>{renderSourcesManager();openModal("sourcesModal")};
+document.querySelector("#addSourceBtn").onclick=()=>addSource(editingType);
+document.querySelector("#manageCategories").onclick=()=>{categoryManagerType=editingType;renderCategoryManager();openModal("categoryModal")};
+document.querySelector("#manageIncomeCats").onclick=()=>{categoryManagerType="income";renderCategoryManager()};
+document.querySelector("#manageExpenseCats").onclick=()=>{categoryManagerType="expense";renderCategoryManager()};
+document.querySelector("#addCategoryBtn").onclick=()=>addCategory(categoryManagerType);
+function addSource(type){
+ const name=prompt(type==="income"?"Nome da nova fonte de recebimento:":"Nome da nova fonte de despesa:");
+ if(name===null)return;
+ const v=name.trim(); if(!v)return;
+ const list=sourcesFor(type);
+ if(list.some(x=>x.toLowerCase()===v.toLowerCase())){alert("Essa fonte já existe.");return;}
+ list.push(v);list.sort((a,b)=>a.localeCompare(b,"pt-BR"));
+ const key=type==='income'?'incomeSourceIcons':'expenseSourceIcons';
+ data[key][v]=iconForSource(v);
+ save();renderSourcesManager();populateFormOptions();
+}
+function renderSourcesManager(){
+ const box=document.querySelector("#sourcesList");
+ const sources=sourcesFor(editingType).filter(Boolean);
+ box.innerHTML=sources.length?sources.map((src,i)=>`<div class="manager-row"><span class="source-icon">${sourceIconHtml(editingType,src)}</span><span class="manager-name">${escapeHtml(src)}</span><div class="manager-actions"><button type="button" title="Editar" data-edit-source="${i}">✏️</button><button type="button" title="Excluir" data-delete-source="${i}">🗑️</button></div></div>`).join(""):"<div class='empty'>Nenhuma fonte personalizada cadastrada.</div>";
+ box.querySelectorAll("[data-edit-source]").forEach(b=>b.onclick=()=>{
+   const i=Number(b.dataset.editSource), old=sourcesFor(editingType)[i]; const value=prompt("Editar fonte:",old); if(value===null)return; const v=value.trim(); if(!v)return;
+   if(sourcesFor(editingType).some((x,j)=>j!==i&&x.toLowerCase()===v.toLowerCase())){alert("Essa fonte já existe.");return;}
+   sourcesFor(editingType)[i]=v;
+   const iconKey=editingType==='income'?'incomeSourceIcons':'expenseSourceIcons';
+   data[iconKey][v]=iconForSource(v); if(old!==v)delete data[iconKey][old];
+   data.transactions.forEach(t=>{if(t.type===editingType&&t.method===old)t.method=v});
+   sourcesFor(editingType).sort((a,b)=>a.localeCompare(b,"pt-BR"));save();renderSourcesManager();populateFormOptions();render();
+ });
+ box.querySelectorAll("[data-delete-source]").forEach(b=>b.onclick=()=>{
+   const i=Number(b.dataset.deleteSource), old=sourcesFor(editingType)[i];
+   if(confirm(`Excluir a fonte "${old}" da lista? Os lançamentos já registrados não serão apagados.`)){sourcesFor(editingType).splice(i,1);const iconKey=editingType==='income'?'incomeSourceIcons':'expenseSourceIcons';delete data[iconKey][old];save();renderSourcesManager();populateFormOptions();}
+ });
+}
+function renderCategoryManager(){
+ const list=categoryListFor(categoryManagerType);
+ document.querySelector("#categoryModalTitle").textContent=categoryManagerType==="income"?"🏷️ Categorias de recebimento":"🏷️ Categorias de despesa";
+ document.querySelector("#manageIncomeCats").classList.toggle("selected",categoryManagerType==="income");
+ document.querySelector("#manageExpenseCats").classList.toggle("selected",categoryManagerType==="expense");
+ const box=document.querySelector("#categoryList");
+ box.innerHTML=list.map((c,i)=>`<div class="manager-row"><span class="manager-icon">${c[0]}</span><span class="manager-name">${escapeHtml(c[1])}</span><div class="manager-actions"><button type="button" title="Editar categoria" data-edit-cat="${i}">✏️</button><button type="button" title="Excluir categoria" data-delete-cat="${i}">🗑️</button></div></div>`).join("");
+ box.querySelectorAll("[data-edit-cat]").forEach(b=>b.onclick=()=>editCategory(Number(b.dataset.editCat)));
+ box.querySelectorAll("[data-delete-cat]").forEach(b=>b.onclick=()=>deleteCategory(Number(b.dataset.deleteCat)));
+}
+function addCategory(type){
+ const name=prompt(type==="income"?"Nome da nova categoria de recebimento:":"Nome da nova categoria de despesa:"); if(name===null)return;
+ const v=name.trim(); if(!v)return;
+ const list=categoryListFor(type); if(list.some(c=>c[1].toLowerCase()===v.toLowerCase())){alert("Essa categoria já existe.");return;}
+ list.push([iconForCategory(v,type),v]); list.sort((a,b)=>a[1].localeCompare(b[1],"pt-BR")); save(); buildCategories(); renderCategoryManager();
+}
+function editCategory(index){
+ const list=categoryListFor(categoryManagerType), old=list[index]; if(!old)return;
+ const value=prompt("Editar nome da categoria:",old[1]); if(value===null)return; const v=value.trim(); if(!v)return;
+ if(list.some((c,i)=>i!==index&&c[1].toLowerCase()===v.toLowerCase())){alert("Essa categoria já existe.");return;}
+ const oldName=old[1]; list[index]=[iconForCategory(v,categoryManagerType),v];
+ data.transactions.forEach(t=>{if(t.type===categoryManagerType&&t.category===oldName)t.category=v});
+ selectedCategoryByType[categoryManagerType]=selectedCategoryByType[categoryManagerType]===oldName?v:selectedCategoryByType[categoryManagerType];
+ save(); buildCategories(); populateFormOptions(); renderCategoryManager(); render();
+}
+function deleteCategory(index){
+ const list=categoryListFor(categoryManagerType), old=list[index]; if(!old)return;
+ if(list.length<=1){alert("É preciso manter pelo menos uma categoria.");return;}
+ if(!confirm(`Excluir a categoria "${old[1]}"? Os lançamentos já registrados não serão apagados.`))return;
+ list.splice(index,1);
+ if(selectedCategoryByType[categoryManagerType]===old[1]) selectedCategoryByType[categoryManagerType]=list[0][1];
+ save(); buildCategories(); populateFormOptions(); renderCategoryManager(); render();
+}
+
+function categoryForShoppingItem(name){
+ const remembered=rememberedShoppingCategory(name); if(remembered)return [remembered.category,remembered.icon||iconForCategory(remembered.category,'expense')];
+ const t=String(name||'').toLowerCase();
+ const rules=[[/arroz|feijão|feijao|macarrão|massa|açúcar|acucar|sal|café|cafe|leite|queijo|carne|frango|peixe|ovo|pão|pao|biscoito|bolacha|iogurte|refrigerante|suco|fruta|verdura|legume|comida|supermercado|mercado/,['Alimentação','🍎']],[/gasolina|diesel|etanol|combustível|combustivel/,['Combustível','⛽']],[/sabão|sabao|detergente|água sanitária|agua sanitaria|desinfetante|limpeza|papel higiênico|papel higienico|vassoura|esponja/,['Casa','🏠']],[/shampoo|condicionador|creme|desodorante|perfume|higiene/,['Compras','🛒']],[/remédio|remedio|farmácia|farmacia|vitamina/,['Saúde','💊']],[/camisa|calça|calca|sapato|vestido|roupa/,['Vestuário','👕']],[/ração|racao|petisco|areia para gato/,['Pet','🐶']]];
+ for(const r of rules)if(r[0].test(t)){rememberShoppingCategory(name,r[1][0],r[1][1]);return r[1];}
+ return ['Outros','📦'];
+}
+function shoppingCategoryOptions(selected){
+ const list=categoryListFor('expense');
+ return list.map(c=>`<option value="${escapeHtml(c[1])}" ${c[1]===selected?'selected':''}>${c[0]} ${escapeHtml(c[1])}</option>`).join('');
+}
+function parseShoppingText(text){
+ const lines=String(text||"").split(/\r?\n/).map(x=>x.trim()).filter(Boolean); const out=[];
+ for(const line of lines){
+   const m=line.match(/^(.*?)(?:\s+|[-–—:]+)R?\$?\s*([0-9]{1,3}(?:\.[0-9]{3})*(?:,[0-9]{1,2})?|[0-9]+(?:[.,][0-9]{1,2})?)\s*$/i);
+   if(m){const price=Number(m[2].replace(/\./g,"").replace(",",".")); const [cat,icon]=categoryForShoppingItem(m[1]); out.push({id:Date.now().toString()+Math.random(),name:m[1].trim(),price,category:cat,icon,checked:false});}
+ } return out;
+}
+function renderShopping(){
+ const box=document.querySelector("#shoppingList"); if(!box)return; const items=data.shoppingItems||[];
+ if(!items.length){box.innerHTML='<div class="empty">Sua lista está vazia. Adicione itens ou importe uma lista.</div>';}
+ else box.innerHTML=items.map((x,i)=>`<div class="shopping-row ${x.checked?'in-cart':''}"><input type="checkbox" data-shop-check="${i}" ${x.checked?'checked':''}><div class="shop-name">${x.icon||'🛒'} ${escapeHtml(x.name)}<div class="shop-cat"><select class="shop-category" data-shop-category="${i}">${shoppingCategoryOptions(x.category||'Outros')}</select></div></div><input class="shop-price" data-shop-price="${i}" value="${formatBRLInput(x.price||0)}" inputmode="numeric"><div class="shop-actions"><button type="button" title="Editar" data-shop-edit="${i}">✏️</button><button type="button" title="Excluir" data-shop-delete="${i}">🗑️</button></div></div>`).join("");
+ box.querySelectorAll('[data-shop-check]').forEach(el=>el.onchange=()=>{data.shoppingItems[Number(el.dataset.shopCheck)].checked=el.checked;save();renderShopping();});
+ box.querySelectorAll('[data-shop-price]').forEach(el=>el.oninput=()=>{const i=Number(el.dataset.shopPrice),digits=el.value.replace(/\D/g,"");data.shoppingItems[i].price=digits?Number(digits)/100:0;el.value=digits?(Number(digits)/100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}):'';save();updateCartTotals();});
+ box.querySelectorAll('[data-shop-category]').forEach(el=>el.onchange=()=>{const i=Number(el.dataset.shopCategory),x=data.shoppingItems[i];x.category=el.value;x.icon=iconForCategory(x.category,'expense');rememberShoppingCategory(x.name,x.category,x.icon);save();renderShopping();});
+ box.querySelectorAll('[data-shop-edit]').forEach(el=>el.onclick=()=>{const i=Number(el.dataset.shopEdit),x=data.shoppingItems[i],n=prompt('Editar item:',x.name);if(n===null)return;const v=n.trim();if(!v)return;const [cat,icon]=categoryForShoppingItem(v);x.name=v;x.category=cat;x.icon=icon;rememberShoppingCategory(v,cat,icon);save();renderShopping();});
+ box.querySelectorAll('[data-shop-delete]').forEach(el=>el.onclick=()=>{const i=Number(el.dataset.shopDelete);if(confirm(`Excluir o item "${data.shoppingItems[i].name}" da lista?`)){data.shoppingItems.splice(i,1);save();renderShopping();}});
+ updateCartTotals();
+}
+function updateCartTotals(){const items=(data.shoppingItems||[]).filter(x=>x.checked);const total=items.reduce((a,x)=>a+Number(x.price||0),0);const ct=document.querySelector('#cartTotal');const cc=document.querySelector('#cartCountText');const badge=document.querySelector('#cartBadge');const cl=document.querySelector('#cartList');if(ct)ct.textContent=money(total);if(cc)cc.textContent=`${items.length} ${items.length===1?'item selecionado':'itens selecionados'}`;if(badge)badge.textContent=items.length;if(cl){cl.innerHTML=items.length?items.map((x)=>{const i=(data.shoppingItems||[]).indexOf(x);return `<label style="display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:10px;background:#fff"><input type="checkbox" data-cart-check="${i}" checked style="width:20px;height:20px;accent-color:#23b26d"><span style="flex:1;font-weight:700">${x.icon||'🛒'} ${escapeHtml(x.name)}</span><strong>${money(x.price||0)}</strong></label>`}).join(''): '<small style="color:var(--muted)">Nenhum item marcado. Marque os produtos comprados na lista acima.</small>';cl.querySelectorAll('[data-cart-check]').forEach(el=>el.onchange=()=>{const i=Number(el.dataset.cartCheck);data.shoppingItems[i].checked=el.checked;save();renderShopping();});}}
+function addShoppingItem(){const name=document.querySelector('#shoppingItemName').value.trim();const amount=parseBRLInput(document.querySelector('#shoppingItemPrice').value);if(!name){alert('Informe o item.');return}const [category,icon]=categoryForShoppingItem(name);rememberShoppingCategory(name,category,icon);data.shoppingItems.push({id:Date.now().toString(),name,price:amount,category,icon,checked:false});save();document.querySelector('#shoppingItemName').value='';document.querySelector('#shoppingItemPrice').value='';renderShopping();}
+function importImageForShopping(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{document.querySelector('#scanPreview').innerHTML=`<img class="scan-img" src="${reader.result}" alt="Lista de compras">`;document.querySelector('#scanAnalyzeBtn').dataset.imageReady='1';document.querySelector('#scanStatus').style.display='none';};reader.readAsDataURL(file);}
+function addCartToExpenses(){const items=(data.shoppingItems||[]).filter(x=>x.checked);if(!items.length){alert('Marque pelo menos um item comprado.');return}const method=prompt('Forma de pagamento usada no carrinho:', 'Pix');if(method===null)return;const m=method.trim()||'Pix';items.forEach(x=>data.transactions.push({id:Date.now().toString()+Math.random(),type:'expense',description:x.name,amount:Number(x.price||0),date:today(),category:x.category||'Outros',method:m,note:'Adicionado a partir da lista de compras'}));data.shoppingItems=(data.shoppingItems||[]).map(x=>x.checked?{...x,checked:false,price:0}:x);save();render();renderShopping();alert(`${items.length} ${items.length===1?'item foi adicionado':'itens foram adicionados'} às despesas.
+
+Os produtos continuam na lista para sua próxima compra, agora desmarcados e sem os preços anteriores.`);}
 function openModal(id){document.querySelector("#"+id).classList.add("show")}
 function closeModal(id){document.querySelector("#"+id).classList.remove("show")}
 function formatBRLInput(value){
@@ -212,52 +504,129 @@ amountInput.addEventListener("input",()=>{
 });
 function resetForm(){
  editingId=null;editingType="expense";document.querySelector("#modalTitle").textContent="Novo lançamento";document.querySelector("#deleteTx").style.display="none";
- document.querySelector("#fDesc").value="";document.querySelector("#fAmount").value="";document.querySelector("#fDate").value=today();document.querySelector("#fCategory").value="Outros";document.querySelector("#fMethod").value="Pix";document.querySelector("#fNote").value="";
- updateTypeButtons();
+ selectedCategoryByType.expense=categories.some(c=>c[1]===selectedCategoryByType.expense)?selectedCategoryByType.expense:(categories[0]?.[1]||"Outros");
+ selectedCategoryByType.income=incomeCategories.some(c=>c[1]===selectedCategoryByType.income)?selectedCategoryByType.income:(incomeCategories[0]?.[1]||"Outros recebimentos");
+ document.querySelector("#fDesc").value="";document.querySelector("#fAmount").value="";document.querySelector("#fDate").value=today();document.querySelector("#fNote").value="";document.querySelector("#fSourceCustom").value="";document.querySelector("#fCategoryCustom").value="";
+ updateTypeButtons(false);
 }
 function openNew(prefill=null){
  resetForm();
- if(prefill){document.querySelector("#modalTitle").textContent="Corrigir lançamento";editingType=prefill.type;document.querySelector("#fDesc").value=prefill.description||"";document.querySelector("#fAmount").value=formatBRLInput(prefill.amount||0);document.querySelector("#fDate").value=/^\d{4}-\d{2}-\d{2}$/.test(prefill.date||"")?prefill.date:today();document.querySelector("#fCategory").value=prefill.category||"Outros";document.querySelector("#fMethod").value=methods.includes(prefill.method)?prefill.method:"Outro";document.querySelector("#fNote").value=prefill.note||"";document.querySelector("#deleteTx").style.display="block";editingId=prefill.id;updateTypeButtons();}
+ if(prefill){
+   document.querySelector("#modalTitle").textContent="Corrigir lançamento";editingType=prefill.type;
+   document.querySelector("#fDesc").value=prefill.description||"";document.querySelector("#fAmount").value=formatBRLInput(prefill.amount||0);document.querySelector("#fDate").value=/^\d{4}-\d{2}-\d{2}$/.test(prefill.date||"")?prefill.date:today();
+   populateFormOptions();
+   if(categoryListFor(editingType).some(c=>c[1]===prefill.category)){
+     selectedCategoryByType[editingType]=prefill.category;document.querySelector("#fCategory").value=prefill.category;
+   }
+   if(sourcesFor(editingType).includes(prefill.method)){
+     document.querySelector("#fMethod").value=prefill.method;
+   }else{
+     document.querySelector("#fMethod").value="Outro";
+     document.querySelector("#fSourceCustom").value=prefill.method||"";
+   }
+   selectedMethodByType[editingType]=document.querySelector("#fMethod").value;
+   document.querySelector("#fNote").value=prefill.note||"";document.querySelector("#deleteTx").style.display="block";editingId=prefill.id;
+   toggleCustomCategory();toggleCustomSource();
+ }
  openModal("editModal");
 }
 function openEdit(id){const tx=data.transactions.find(x=>String(x.id)===String(id));if(tx)openNew(tx)}
-function updateTypeButtons(){document.querySelector("#incomeType").classList.toggle("selected",editingType==="income");document.querySelector("#expenseType").classList.toggle("selected",editingType==="expense")}
-document.querySelector("#incomeType").onclick=()=>{editingType="income";updateTypeButtons()};
-document.querySelector("#expenseType").onclick=()=>{editingType="expense";updateTypeButtons()};
+function updateTypeButtons(clearFields=true){
+ document.querySelector("#incomeType").classList.toggle("selected",editingType==="income");
+ document.querySelector("#expenseType").classList.toggle("selected",editingType==="expense");
+ if(clearFields){
+   document.querySelector("#fDesc").value="";
+   document.querySelector("#fAmount").value="";
+   document.querySelector("#fNote").value="";
+   document.querySelector("#fSourceCustom").value="";
+   document.querySelector("#fCategoryCustom").value="";
+ }
+ populateFormOptions();
+ toggleCustomCategory();toggleCustomSource();
+}
+document.querySelector("#incomeType").onclick=()=>{if(editingType!=="income"){selectedCategoryByType.expense=document.querySelector("#fCategory").value;selectedMethodByType.expense=document.querySelector("#fMethod").value;editingType="income";updateTypeButtons(true)}};
+document.querySelector("#expenseType").onclick=()=>{if(editingType!=="expense"){selectedCategoryByType.income=document.querySelector("#fCategory").value;selectedMethodByType.income=document.querySelector("#fMethod").value;editingType="expense";updateTypeButtons(true)}};
 document.querySelector("#manual").onclick=()=>openNew();
 document.querySelector("#saveTx").onclick=()=>{
  const amount=parseBRLInput(document.querySelector("#fAmount").value);
  if(!amount||amount<0){alert("Informe um valor válido.");return}
- const tx={id:editingId||Date.now().toString(),type:editingType,description:document.querySelector("#fDesc").value.trim()||"Sem descrição",amount,date:document.querySelector("#fDate").value||today(),category:document.querySelector("#fCategory").value,method:document.querySelector("#fMethod").value,note:document.querySelector("#fNote").value.trim()};
+ let category=document.querySelector("#fCategory").value;
+ if(category===otherCategoryName(editingType)){
+   const customCategory=document.querySelector("#fCategoryCustom").value.trim();
+   if(!customCategory){alert("Se escolher Outro, informe o nome da nova categoria.");document.querySelector("#fCategoryCustom").focus();return}
+   const list=categoryListFor(editingType);
+   const existing=list.find(c=>c[1].toLowerCase()===customCategory.toLowerCase());
+   if(existing) category=existing[1];
+   else { list.push([iconForCategory(customCategory,editingType),customCategory]); list.sort((a,b)=>a[1].localeCompare(b[1],"pt-BR")); data[editingType==="income"?"incomeCategories":"expenseCategories"]=list; category=customCategory; }
+   selectedCategoryByType[editingType]=category;
+   save(); buildCategories(); populateFormOptions();
+ }
+ let method=document.querySelector("#fMethod").value;
+ if(method==="Outro"){
+   method=document.querySelector("#fSourceCustom").value.trim();
+   if(!method){alert("Se escolher Outro, informe a nova fonte.");document.querySelector("#fSourceCustom").focus();return}
+   const src=sourcesFor(editingType);
+   if(!src.some(x=>x.toLowerCase()===method.toLowerCase())){src.push(method);src.sort((a,b)=>a.localeCompare(b,"pt-BR"));}
+ }
+ const tx={id:editingId||Date.now().toString(),type:editingType,description:document.querySelector("#fDesc").value.trim()||"Sem descrição",amount,date:document.querySelector("#fDate").value||today(),category,method,note:document.querySelector("#fNote").value.trim()};
  if(editingId){const i=data.transactions.findIndex(x=>String(x.id)===String(editingId));if(i>=0)data.transactions[i]=tx}else data.transactions.push(tx);
  save();closeModal("editModal");render();
 };
 document.querySelector("#deleteTx").onclick=()=>{if(!editingId)return;if(confirm("Excluir este lançamento?")){data.transactions=data.transactions.filter(x=>String(x.id)!==String(editingId));save();closeModal("editModal");render()}};
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
 document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}));
-document.querySelector("#allCategories").onclick=()=>openModal("categoryModal");
+document.querySelector("#allCategories").onclick=()=>{categoryManagerType=editingType;renderCategoryManager();openModal("categoryModal")};
 document.querySelector("#allTransactions").onclick=()=>{filterCategory=null;render();alert("Todos os lançamentos estão exibidos na lista. Toque em qualquer lançamento para editar.")};
 
 function interpret(text){
  const t=text.toLowerCase();const m=t.match(/(?:r\$|\b)(\d+(?:[.,]\d{1,2})?)/);if(!m)return null;
  let amount=parseFloat(m[1].replace(/\./g,"").replace(",","."));
- let type=/recebi|recebimento|salário|salario|ganhei|entrou|renda/.test(t)?"income":"expense";
- let category="Outros",icon="📦";
- const rules=[[/supermercado|mercado|arroz|feijão|feijao|comida|restaurante|lanche|alimentação|alimentacao/,"Alimentação","🍎"],[/gasolina|combustível|combustivel|posto|abasteci/,"Combustível","⛽"],[/uber|ônibus|onibus|transporte|estacionamento/,"Transporte","🚗"],[/luz|energia|água|agua|internet|telefone|aluguel/,"Contas","💡"],[/farmácia|farmacia|remédio|remedio|médico|medico/,"Saúde","💊"],[/roupa|camisa|calça|calca|vestido/,"Vestuário","👕"],[/academia|musculação|musculacao/,"Academia","🏋️"],[/celular|computador|tecnologia/,"Tecnologia","📱"]];
- for(const r of rules)if(r[0].test(t)){category=r[1];icon=r[2];break}
- let method=/pix/.test(t)?"Pix":/cartão|cartao|crédito|credito/.test(t)?"Cartão de crédito":/débito|debito/.test(t)?"Cartão de débito":/dinheiro|espécie|especie/.test(t)?"Dinheiro":"Outro";
- return {type,amount,category,icon,method,description:text.length>60?text.slice(0,57)+"...":text,date:today(),note:""};
+ let type=/recebi|recebimento|salário|salario|ganhei|entrou|renda|pagamento/.test(t)?"income":"expense";
+ let category=type==="income"?"Salário":"Outros",icon=type==="income"?"💼":"📦",method="Outro",source="";
+ if(type==="income"){
+   const incomeRules=[[/hora extra|horas extras|hora-extra|hora extra/ ,"Horas extras","⏱️"],[/aula|aulas|docência|docencia|professor/ ,"Aulas / Docência","🎓"],[/consultoria|consultoria/ ,"Consultoria","🧾"],[/serviço|servico|serviços|servicos|freela|freelance/ ,"Serviços","🛠️"],[/venda|vendas/ ,"Vendas","🛍️"],[/reembolso|reembolsaram|reembolsado/ ,"Reembolso","↩️"],[/rendimento|rendimentos|juros|investimento/ ,"Rendimentos","📈"]];
+   for(const r of incomeRules)if(r[0].test(t)){category=r[1];icon=r[2];break}
+   if(/salário|salario/.test(t))category="Salário";
+   // Primeiro tenta fontes já cadastradas, depois expressões comuns como “da Prefeitura”.
+   const saved=(data.incomeSources||[]).find(src=>t.includes(src.toLowerCase()));
+   if(saved) source=saved;
+   else {
+     const sm=t.match(/(?:salário|salario)\s+(?:da|do|das|dos|de)\s+([a-záàâãéêíóôõúç][a-záàâãéêíóôõúç0-9 ]{2,40})/i) || t.match(/\b(?:da|do|das|dos|de)\s+([a-záàâãéêíóôõúç][a-záàâãéêíóôõúç0-9 ]{2,40})/i);
+     if(sm){source=sm[1].trim().replace(/\s+(?:hoje|ontem|este|essa|esse)\b.*$/i,"").trim();source=source.replace(/\s+/g," ");if(source)source=source.split(" ").map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(" ");}
+   }
+   method=source||"Nova fonte";
+ } else {
+   const rules=[[/supermercado|mercado|arroz|feijão|feijao|comida|restaurante|lanche|alimentação|alimentacao/,"Alimentação","🍎"],[/gasolina|combustível|combustivel|posto|abasteci/,"Combustível","⛽"],[/uber|ônibus|onibus|transporte|estacionamento/,"Transporte","🚗"],[/luz|energia|água|agua|internet|telefone|aluguel/,"Contas","💡"],[/farmácia|farmacia|remédio|remedio|médico|medico/,"Saúde","💊"],[/roupa|camisa|calça|calca|vestido/,"Vestuário","👕"],[/academia|musculação|musculacao/,"Academia","🏋️"],[/celular|computador|tecnologia/,"Tecnologia","📱"]];
+   for(const r of rules)if(r[0].test(t)){category=r[1];icon=r[2];break}
+   method=/pix/.test(t)?"Pix":/cartão|cartao|crédito|credito/.test(t)?"Cartão de crédito":/débito|debito/.test(t)?"Cartão de débito":/dinheiro|espécie|especie/.test(t)?"Dinheiro":"Outro";
+ }
+ let description=text;
+ if(type==="income"){
+   if(/salário|salario/.test(t))description="Salário";
+   else if(category!=="Salário")description=category;
+ }
+ return {type,amount,category,icon,method,description:description.length>60?description.slice(0,57)+"...":description,date:today(),note:""};
 }
 function showResult(){
  const text=document.querySelector("#prompt").value.trim(),out=interpret(text),box=document.querySelector("#result");
  if(!out){box.style.display="block";box.innerHTML="Não consegui identificar o valor. Tente algo como: <b>“Gastei R$ 85 no supermercado.”</b>";return}
  box.style.display="block";
- box.innerHTML=`<b>${out.type==="income"?"📥 Entrada":"📤 Despesa"} identificada</b>${out.icon} ${out.category} · ${money(out.amount)} · ${out.method}<div class="confirm"><button class="ok" id="confirm">✅ Confirmar</button><button class="cancel" id="edit">✏️ Corrigir</button></div>`;
- document.querySelector("#confirm").onclick=()=>{out.id=Date.now().toString();data.transactions.push(out);save();box.style.display="none";document.querySelector("#prompt").value="";render()};
+ box.innerHTML=`<b>${out.type==="income"?"📥 Entrada":"📤 Despesa"} identificada</b><div>${out.icon} ${out.category} · ${money(out.amount)} · ${escapeHtml(out.method||"Não informado")}</div>${out.type==="income"&&out.method?`<div style="margin-top:4px;font-size:12px;color:var(--muted)">Fonte: ${escapeHtml(out.method)}</div>`:""}<div class="confirm"><button class="ok" id="confirm">✅ Confirmar</button><button class="cancel" id="edit">✏️ Corrigir</button></div>`;
+ document.querySelector("#confirm").onclick=()=>{
+   if(out.method&&out.method!=="Outro"&&!methods.includes(out.method)){const src=sourcesFor(out.type);if(!src.includes(out.method)){src.push(out.method);src.sort((a,b)=>a.localeCompare(b,"pt-BR"));}}
+   out.id=Date.now().toString();data.transactions.push(out);save();box.style.display="none";document.querySelector("#prompt").value="";render();
+ };
  document.querySelector("#edit").onclick=()=>openNew(out);
 }
 document.querySelector("#send").onclick=showResult;document.querySelector("#prompt").addEventListener("keydown",e=>{if(e.key==="Enter")showResult()});
 
+document.querySelector('#shoppingBtn').onclick=()=>{renderShopping();openModal('shoppingModal')};
+document.querySelector('#addShoppingItem').onclick=addShoppingItem;
+document.querySelector('#addCartToExpenses').onclick=addCartToExpenses;
+document.querySelector('#scanPurchaseBtn').onclick=()=>openModal('scanModal');
+document.querySelector('#scanPreview').onclick=()=>document.querySelector('#purchaseImageInput').click();
+document.querySelector('#purchaseImageInput').onchange=e=>importImageForShopping(e.target.files[0]);
+document.querySelector('#scanAnalyzeBtn').onclick=()=>{const st=document.querySelector('#scanStatus');st.style.display='block';st.innerHTML='<b>📷 Imagem recebida.</b><div style="margin-top:5px">A tela de análise com IA está preparada, mas a leitura inteligente da imagem precisa de um backend seguro (por exemplo, Firebase Functions) para não expor a chave da IA no aplicativo. A próxima etapa será conectar esse serviço e retornar item, preço e categoria para sua confirmação.</div>';};
 function switchView(id){
  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.querySelector("#"+id).classList.add("active");
  document.querySelectorAll(".bottom button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
@@ -265,6 +634,8 @@ function switchView(id){
 }
 document.querySelectorAll(".bottom button").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
 
+document.querySelector("#helpBtn").onclick=()=>openModal("helpModal");
+document.querySelector("#aboutBtn").onclick=()=>openModal("aboutModal");
 document.querySelector("#exportBtn").onclick=()=>{
  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="backup_fintra_"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 };
@@ -272,7 +643,7 @@ document.querySelector("#importBtn").onclick=()=>document.querySelector("#fileIn
 document.querySelector("#fileInput").onchange=e=>{
  const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const obj=JSON.parse(reader.result);if(!Array.isArray(obj.transactions))throw new Error();data=obj;save();render();alert("Backup restaurado com sucesso.");}catch{alert("Arquivo de backup inválido.")}};reader.readAsText(file);e.target.value="";
 };
-document.querySelector("#clearBtn").onclick=()=>{if(confirm("Tem certeza que deseja apagar TODOS os lançamentos? Faça um backup antes.")){data={transactions:[]};save();render()}};
+document.querySelector("#clearBtn").onclick=()=>{if(confirm("Tem certeza que deseja apagar TODOS os lançamentos? Faça um backup antes.")){data={transactions:[],incomeSources:defaultSources.slice(),expenseSources:defaultSources.slice(),expenseCategories:defaultExpenseCategories.map(x=>[...x]),incomeCategories:defaultIncomeCategories.map(x=>[...x])};categories=data.expenseCategories;incomeCategories=data.incomeCategories;selectedCategoryByType={expense:"Outros",income:"Salário"};save();buildCategories();render()}};
 
 let recognition;const mic=document.querySelector("#mic");
 const isLocalFile=location.protocol==="file:" || location.protocol==="content:";
