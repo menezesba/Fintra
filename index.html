@@ -118,7 +118,7 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
   </div>
   <div class="form-grid">
    <div class="field full"><label>Descrição</label><input id="fDesc" placeholder="Ex.: Supermercado"></div>
-   <div class="field"><label>Valor (R$)</label><input id="fAmount" type="number" step="0.01" inputmode="decimal" placeholder="0,00"></div>
+   <div class="field"><label>Valor (R$)</label><input id="fAmount" type="text" inputmode="numeric" autocomplete="off" placeholder="0,00"></div>
    <div class="field"><label>Data</label><input id="fDate" type="date"></div>
    <div class="field"><label>Categoria</label><select id="fCategory"></select></div>
    <div class="field"><label>Fonte / conta / cartão</label><select id="fMethod"></select></div>
@@ -149,7 +149,7 @@ let editingId=null, editingType="expense", filterCategory=null;
 
 function money(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
 function today(){return new Date().toISOString().slice(0,10)}
-function brDate(iso){if(!iso)return ""; if(/^\\d{2}\\/\\d{2}\\/\\d{4}$/.test(iso))return iso; const p=iso.split("-"); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:iso}
+function brDate(iso){if(!iso)return ""; if(/^\d{2}\/\d{2}\/\d{4}$/.test(iso))return iso; const p=iso.split("-"); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:iso}
 function save(){localStorage.setItem("fintraData",JSON.stringify(data))}
 function catInfo(name){return categories.find(c=>c[1]===name)||["📦","Outros"]}
 
@@ -193,6 +193,23 @@ function buildCategories(){
 }
 function openModal(id){document.querySelector("#"+id).classList.add("show")}
 function closeModal(id){document.querySelector("#"+id).classList.remove("show")}
+function formatBRLInput(value){
+ const n=Number(value||0);
+ if(!n)return "";
+ return n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function parseBRLInput(value){
+ let s=String(value||"").replace(/[^0-9]/g,"");
+ if(!s)return 0;
+ return Number(s)/100;
+}
+const amountInput=document.querySelector("#fAmount");
+amountInput.addEventListener("input",()=>{
+ const digits=amountInput.value.replace(/\D/g,"");
+ if(!digits){amountInput.value="";return;}
+ const n=Number(digits)/100;
+ amountInput.value=n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+});
 function resetForm(){
  editingId=null;editingType="expense";document.querySelector("#modalTitle").textContent="Novo lançamento";document.querySelector("#deleteTx").style.display="none";
  document.querySelector("#fDesc").value="";document.querySelector("#fAmount").value="";document.querySelector("#fDate").value=today();document.querySelector("#fCategory").value="Outros";document.querySelector("#fMethod").value="Pix";document.querySelector("#fNote").value="";
@@ -200,7 +217,7 @@ function resetForm(){
 }
 function openNew(prefill=null){
  resetForm();
- if(prefill){document.querySelector("#modalTitle").textContent="Corrigir lançamento";editingType=prefill.type;document.querySelector("#fDesc").value=prefill.description||"";document.querySelector("#fAmount").value=Number(prefill.amount||0).toFixed(2);document.querySelector("#fDate").value=/^\\d{4}-\\d{2}-\\d{2}$/.test(prefill.date||"")?prefill.date:today();document.querySelector("#fCategory").value=prefill.category||"Outros";document.querySelector("#fMethod").value=methods.includes(prefill.method)?prefill.method:"Outro";document.querySelector("#fNote").value=prefill.note||"";document.querySelector("#deleteTx").style.display="block";editingId=prefill.id;updateTypeButtons();}
+ if(prefill){document.querySelector("#modalTitle").textContent="Corrigir lançamento";editingType=prefill.type;document.querySelector("#fDesc").value=prefill.description||"";document.querySelector("#fAmount").value=formatBRLInput(prefill.amount||0);document.querySelector("#fDate").value=/^\d{4}-\d{2}-\d{2}$/.test(prefill.date||"")?prefill.date:today();document.querySelector("#fCategory").value=prefill.category||"Outros";document.querySelector("#fMethod").value=methods.includes(prefill.method)?prefill.method:"Outro";document.querySelector("#fNote").value=prefill.note||"";document.querySelector("#deleteTx").style.display="block";editingId=prefill.id;updateTypeButtons();}
  openModal("editModal");
 }
 function openEdit(id){const tx=data.transactions.find(x=>String(x.id)===String(id));if(tx)openNew(tx)}
@@ -209,7 +226,7 @@ document.querySelector("#incomeType").onclick=()=>{editingType="income";updateTy
 document.querySelector("#expenseType").onclick=()=>{editingType="expense";updateTypeButtons()};
 document.querySelector("#manual").onclick=()=>openNew();
 document.querySelector("#saveTx").onclick=()=>{
- const amount=Number(String(document.querySelector("#fAmount").value).replace(",","."));
+ const amount=parseBRLInput(document.querySelector("#fAmount").value);
  if(!amount||amount<0){alert("Informe um valor válido.");return}
  const tx={id:editingId||Date.now().toString(),type:editingType,description:document.querySelector("#fDesc").value.trim()||"Sem descrição",amount,date:document.querySelector("#fDate").value||today(),category:document.querySelector("#fCategory").value,method:document.querySelector("#fMethod").value,note:document.querySelector("#fNote").value.trim()};
  if(editingId){const i=data.transactions.findIndex(x=>String(x.id)===String(editingId));if(i>=0)data.transactions[i]=tx}else data.transactions.push(tx);
@@ -222,8 +239,8 @@ document.querySelector("#allCategories").onclick=()=>openModal("categoryModal");
 document.querySelector("#allTransactions").onclick=()=>{filterCategory=null;render();alert("Todos os lançamentos estão exibidos na lista. Toque em qualquer lançamento para editar.")};
 
 function interpret(text){
- const t=text.toLowerCase();const m=t.match(/(?:r\\$|\\b)(\\d+(?:[.,]\\d{1,2})?)/);if(!m)return null;
- let amount=parseFloat(m[1].replace(/\\./g,"").replace(",","."));
+ const t=text.toLowerCase();const m=t.match(/(?:r\$|\b)(\d+(?:[.,]\d{1,2})?)/);if(!m)return null;
+ let amount=parseFloat(m[1].replace(/\./g,"").replace(",","."));
  let type=/recebi|recebimento|salário|salario|ganhei|entrou|renda/.test(t)?"income":"expense";
  let category="Outros",icon="📦";
  const rules=[[/supermercado|mercado|arroz|feijão|feijao|comida|restaurante|lanche|alimentação|alimentacao/,"Alimentação","🍎"],[/gasolina|combustível|combustivel|posto|abasteci/,"Combustível","⛽"],[/uber|ônibus|onibus|transporte|estacionamento/,"Transporte","🚗"],[/luz|energia|água|agua|internet|telefone|aluguel/,"Contas","💡"],[/farmácia|farmacia|remédio|remedio|médico|medico/,"Saúde","💊"],[/roupa|camisa|calça|calca|vestido/,"Vestuário","👕"],[/academia|musculação|musculacao/,"Academia","🏋️"],[/celular|computador|tecnologia/,"Tecnologia","📱"]];
@@ -258,8 +275,25 @@ document.querySelector("#fileInput").onchange=e=>{
 document.querySelector("#clearBtn").onclick=()=>{if(confirm("Tem certeza que deseja apagar TODOS os lançamentos? Faça um backup antes.")){data={transactions:[]};save();render()}};
 
 let recognition;const mic=document.querySelector("#mic");
-if("webkitSpeechRecognition" in window || "SpeechRecognition" in window){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;recognition=new SR();recognition.lang="pt-BR";recognition.interimResults=false;recognition.onstart=()=>mic.textContent="🔴";recognition.onend=()=>mic.textContent="🎤";recognition.onresult=e=>{document.querySelector("#prompt").value=e.results[0][0].transcript;showResult()};mic.onclick=()=>{try{recognition.start()}catch(e){}}}
-else mic.onclick=()=>alert("O reconhecimento de voz depende do navegador e das permissões de microfone. No Android, use Chrome e permita o acesso ao microfone.");
+const isLocalFile=location.protocol==="file:" || location.protocol==="content:";
+if("webkitSpeechRecognition" in window || "SpeechRecognition" in window){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ recognition=new SR();
+ recognition.lang="pt-BR";
+ recognition.continuous=false;
+ recognition.interimResults=false;
+ recognition.onstart=()=>{mic.textContent="🔴";mic.title="Ouvindo..."};
+ recognition.onend=()=>{mic.textContent="🎤";mic.title="Falar"};
+ recognition.onerror=e=>{mic.textContent="🎤";const msg=e.error==="not-allowed"?"O microfone não foi autorizado.":e.error==="network"?"O reconhecimento de voz precisa de conexão com a internet.":"Não foi possível iniciar o reconhecimento de voz.";alert(msg+"\n\nNo celular, teste a Fintra publicada no GitHub Pages (HTTPS). O HTML aberto diretamente da pasta pode bloquear o recurso de voz.");};
+ recognition.onresult=e=>{document.querySelector("#prompt").value=e.results[0][0].transcript;showResult()};
+ mic.onclick=()=>{
+   if(isLocalFile){alert("🎤 O comando de voz precisa ser testado com a Fintra publicada em HTTPS.\n\nQuando você abre o HTML diretamente da pasta do celular, o navegador pode bloquear o reconhecimento de voz.");return;}
+   try{recognition.start()}catch(e){alert("O reconhecimento de voz já está sendo iniciado. Aguarde um instante e tente novamente.");}
+ };
+}else{
+ mic.onclick=()=>alert("🎤 O reconhecimento de voz não está disponível neste navegador. Abra a Fintra no Chrome, pela versão publicada em HTTPS, e permita o microfone.");
+}
+
 
 buildCategories();render();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{}))}
