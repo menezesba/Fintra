@@ -204,7 +204,13 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
    </div>
    <div style="display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;margin:6px 0 10px"><span style="height:1px;background:var(--line);flex:1"></span>ou e-mail e senha<span style="height:1px;background:var(--line);flex:1"></span></div>
    <div class="field"><label>E-mail</label><input id="firebaseEmail" type="email" autocomplete="email" placeholder="seu@email.com"></div>
-   <div class="field"><label>Senha</label><input id="firebasePassword" type="password" autocomplete="current-password" placeholder="Sua senha"></div>
+   <div class="field"><label>Senha</label>
+    <div style="position:relative">
+      <input id="firebasePassword" type="password" autocomplete="current-password" placeholder="Sua senha" style="padding-right:88px">
+      <button type="button" id="toggleFirebasePassword" aria-label="Mostrar senha" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:700;padding:8px;cursor:pointer">👁️ Mostrar</button>
+    </div>
+   </div>
+   <div id="firebaseLoginError" style="display:none;margin:8px 0 10px;padding:10px 12px;border-radius:12px;background:#fff0f0;color:#a52828;font-size:13px;text-align:left"></div>
    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
     <button type="button" class="save" id="firebaseEmailLogin" style="margin-top:0">Entrar</button>
     <button type="button" class="save" id="firebaseEmailCreate" style="margin-top:0;background:#0d6b72">Criar conta</button>
@@ -808,27 +814,92 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
     }finally{syncLoading=false;}
   }
 
+  function clearLoginError(){
+    const el=$("firebaseLoginError");
+    if(el){el.style.display="none";el.textContent="";}
+  }
+  function showLoginError(message){
+    const el=$("firebaseLoginError");
+    if(el){el.textContent=message;el.style.display="block";}
+    setStatus("❌ "+message);
+  }
+  function friendlyAuthError(e, action="login"){
+    const code=e?.code||"";
+    const map={
+      "auth/invalid-email":"O e-mail informado não é válido.",
+      "auth/user-not-found":"Não existe uma conta com este e-mail.",
+      "auth/wrong-password":"A senha está incorreta.",
+      "auth/invalid-credential":"E-mail ou senha incorretos.",
+      "auth/too-many-requests":"Muitas tentativas. Aguarde alguns minutos e tente novamente.",
+      "auth/user-disabled":"Esta conta foi desativada.",
+      "auth/email-already-in-use":"Este e-mail já está cadastrado. Tente entrar em vez de criar uma nova conta.",
+      "auth/weak-password":"A senha precisa ter pelo menos 6 caracteres.",
+      "auth/popup-blocked":"O navegador bloqueou a janela do Google.",
+      "auth/popup-closed-by-user":"A janela do Google foi fechada antes da conclusão do login.",
+      "auth/cancelled-popup-request":"O login do Google foi cancelado pelo navegador. Vamos usar o modo de redirecionamento.",
+      "auth/account-exists-with-different-credential":"Este e-mail já possui uma conta no Fintra com outro método de login. Entre primeiro com e-mail e senha para vincular o Google depois."
+    };
+    return map[code] || (action==="create" ? "Não foi possível criar a conta." : "Não foi possível entrar. Verifique seus dados.");
+  }
   async function doEmailLogin(){
+    clearLoginError();
     const email=$("firebaseEmail").value.trim(); const pass=$("firebasePassword").value;
-    if(!email||!pass){alert("Informe e-mail e senha.");return;}
-    try{await signInWithEmailAndPassword(auth,email,pass);}
-    catch(e){console.error(e);alert("Não foi possível entrar. Verifique o e-mail e a senha.\n\nCódigo: "+(e.code||"erro"));}
+    if(!email||!pass){showLoginError("Informe o e-mail e a senha.");return;}
+    const btn=$("firebaseEmailLogin");
+    if(btn){btn.disabled=true;btn.textContent="Entrando...";}
+    try{
+      await signInWithEmailAndPassword(auth,email,pass);
+      clearLoginError();
+    }catch(e){
+      console.error("Erro no login por e-mail",e);
+      showLoginError(friendlyAuthError(e,"login")+"\n\nCódigo: "+(e.code||"erro"));
+    }finally{
+      if(btn){btn.disabled=false;btn.textContent="Entrar";}
+    }
   }
   async function doCreate(){
+    clearLoginError();
     const email=$("firebaseEmail").value.trim(); const pass=$("firebasePassword").value;
-    if(!email||pass.length<6){alert("Informe um e-mail e uma senha com pelo menos 6 caracteres.");return;}
-    try{await createUserWithEmailAndPassword(auth,email,pass);}
-    catch(e){console.error(e);alert("Não foi possível criar a conta.\n\nCódigo: "+(e.code||"erro"));}
+    if(!email){showLoginError("Informe um e-mail.");return;}
+    if(pass.length<6){showLoginError("A senha precisa ter pelo menos 6 caracteres.");return;}
+    const btn=$("firebaseEmailCreate");
+    if(btn){btn.disabled=true;btn.textContent="Criando...";}
+    try{
+      await createUserWithEmailAndPassword(auth,email,pass);
+      clearLoginError();
+    }catch(e){
+      console.error("Erro ao criar conta",e);
+      showLoginError(friendlyAuthError(e,"create")+"\n\nCódigo: "+(e.code||"erro"));
+    }finally{
+      if(btn){btn.disabled=false;btn.textContent="Criar conta";}
+    }
+  }
+  function isMobileBrowser(){
+    return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||"");
   }
   async function doGoogle(){
-    try{await signInWithPopup(auth,googleProvider);}
-    catch(e){
-      console.warn("Popup Google falhou",e);
-      if(e.code==="auth/popup-blocked" || e.code==="auth/operation-not-supported-in-this-environment"){
-        try{await signInWithRedirect(auth,googleProvider);}catch(er){alert("Não foi possível abrir o login do Google.");}
-      }else if(e.code!=="auth/popup-closed-by-user"){
-        alert("Não foi possível entrar com Google.\n\nCódigo: "+(e.code||"erro"));
+    clearLoginError();
+    const btn=$("googleLoginBtn");
+    if(btn){btn.disabled=true;btn.style.opacity=".65";}
+    try{
+      // No celular, o redirecionamento é mais confiável do que popup.
+      if(isMobileBrowser()){
+        await signInWithRedirect(auth,googleProvider);
+        return;
       }
+      await signInWithPopup(auth,googleProvider);
+    }catch(e){
+      console.warn("Login Google falhou",e);
+      if(e.code==="auth/popup-blocked" || e.code==="auth/operation-not-supported-in-this-environment" || e.code==="auth/cancelled-popup-request"){
+        try{await signInWithRedirect(auth,googleProvider);return;}catch(er){
+          console.error("Redirecionamento Google falhou",er);
+          showLoginError(friendlyAuthError(er,"google")+"\n\nCódigo: "+(er.code||"erro"));
+        }
+      }else{
+        showLoginError(friendlyAuthError(e,"google")+"\n\nCódigo: "+(e.code||"erro"));
+      }
+    }finally{
+      if(btn){btn.disabled=false;btn.style.opacity="1";}
     }
   }
 
@@ -847,7 +918,14 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
       setStatus("Não conectado ao Firebase.");
     }
   });
-  getRedirectResult(auth).catch(()=>{});
+  getRedirectResult(auth).then(result=>{
+    if(result?.user){setStatus("✅ Login Google concluído. Conta conectada.",true);}
+  }).catch(e=>{
+    if(e){
+      console.error("Resultado do redirecionamento Google",e);
+      setStatus("❌ "+friendlyAuthError(e,"google")+"<br><small>Código: "+(e.code||"erro")+"</small>");
+    }
+  });
 
   window.fintraFirebase={app,auth,db,googleProvider,signInWithPopup,signInWithRedirect,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut,sendLocalToCloud,loadCloudToLocal};
 
@@ -855,6 +933,13 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
     $("googleLoginBtn")?.addEventListener("click",doGoogle);
     $("firebaseEmailLogin")?.addEventListener("click",doEmailLogin);
     $("firebaseEmailCreate")?.addEventListener("click",doCreate);
+    $("toggleFirebasePassword")?.addEventListener("click",()=>{
+      const input=$("firebasePassword"); const btn=$("toggleFirebasePassword");
+      if(!input)return;
+      const visible=input.type==="text";
+      input.type=visible?"password":"text";
+      if(btn){btn.textContent=visible?"👁️ Mostrar":"🙈 Ocultar";btn.setAttribute("aria-label",visible?"Mostrar senha":"Ocultar senha");}
+    });
     $("firebaseSendBtn")?.addEventListener("click",()=>sendLocalToCloud(false));
     $("firebaseLoadBtn")?.addEventListener("click",loadCloudToLocal);
     $("firebaseSyncBtn")?.addEventListener("click",()=>writeCloud().then(ok=>{if(ok)alert("Sincronização concluída.")}));
