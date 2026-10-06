@@ -702,6 +702,13 @@ window.replaceFintraData=(remote)=>{data=JSON.parse(JSON.stringify(remote));if(!
 buildCategories();render();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{}))}
 </script>
+  <script>
+  // Abre a janela do Firebase independentemente do carregamento do módulo Firebase.
+  window.addEventListener("DOMContentLoaded",()=>{
+    const firebaseBtn=document.getElementById("firebaseBtn");
+    if(firebaseBtn) firebaseBtn.addEventListener("click",()=>openModal("firebaseModal"));
+  });
+  </script>
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
@@ -772,14 +779,10 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
     if(!currentUser){alert("Entre primeiro na sua conta Firebase.");return;}
     const snap=await getDoc(cloudRef());
     if(snap.exists() && !force){
-      if(!confirm("Já existem dados desta conta no Firebase. Deseja SUBSTITUIR os dados da nuvem pelos dados deste aparelho?
-
-Antes disso, faça um backup se quiser manter uma cópia."))return;
+      if(!confirm("Já existem dados desta conta no Firebase. Deseja SUBSTITUIR os dados da nuvem pelos dados deste aparelho?\n\nAntes disso, faça um backup se quiser manter uma cópia."))return;
     }
     const ok=await writeCloud();
-    if(ok)alert("Dados deste aparelho enviados para o Firebase com sucesso.
-
-Agora podemos abrir a Fintra no tablet e carregar esses mesmos dados.");
+    if(ok)alert("Dados deste aparelho enviados para o Firebase com sucesso.\n\nAgora podemos abrir a Fintra no tablet e carregar esses mesmos dados.");
   }
 
   async function loadCloudToLocal(){
@@ -788,11 +791,7 @@ Agora podemos abrir a Fintra no tablet e carregar esses mesmos dados.");
     if(!snap.exists()){alert("Ainda não há dados salvos no Firebase para esta conta. Primeiro envie os dados deste aparelho.");return;}
     const remote=snap.data()?.data;
     if(!remote || !Array.isArray(remote.transactions)){alert("Os dados encontrados no Firebase não têm um formato válido de Fintra.");return;}
-    if(!confirm("Isso substituirá os dados atualmente neste aparelho pelos dados do Firebase.
-
-Recomendo fazer um backup local antes.
-
-Deseja continuar?"))return;
+    if(!confirm("Isso substituirá os dados atualmente neste aparelho pelos dados do Firebase.\n\nRecomendo fazer um backup local antes.\n\nDeseja continuar?"))return;
     syncLoading=true;
     try{
       window.replaceFintraData(remote);
@@ -806,17 +805,13 @@ Deseja continuar?"))return;
     const email=$("firebaseEmail").value.trim(); const pass=$("firebasePassword").value;
     if(!email||!pass){alert("Informe e-mail e senha.");return;}
     try{await signInWithEmailAndPassword(auth,email,pass);}
-    catch(e){console.error(e);alert("Não foi possível entrar. Verifique o e-mail e a senha.
-
-Código: "+(e.code||"erro"));}
+    catch(e){console.error(e);alert("Não foi possível entrar. Verifique o e-mail e a senha.\n\nCódigo: "+(e.code||"erro"));}
   }
   async function doCreate(){
     const email=$("firebaseEmail").value.trim(); const pass=$("firebasePassword").value;
     if(!email||pass.length<6){alert("Informe um e-mail e uma senha com pelo menos 6 caracteres.");return;}
     try{await createUserWithEmailAndPassword(auth,email,pass);}
-    catch(e){console.error(e);alert("Não foi possível criar a conta.
-
-Código: "+(e.code||"erro"));}
+    catch(e){console.error(e);alert("Não foi possível criar a conta.\n\nCódigo: "+(e.code||"erro"));}
   }
   async function doGoogle(){
     try{await signInWithPopup(auth,googleProvider);}
@@ -825,9 +820,7 @@ Código: "+(e.code||"erro"));}
       if(e.code==="auth/popup-blocked" || e.code==="auth/operation-not-supported-in-this-environment"){
         try{await signInWithRedirect(auth,googleProvider);}catch(er){alert("Não foi possível abrir o login do Google.");}
       }else if(e.code!=="auth/popup-closed-by-user"){
-        alert("Não foi possível entrar com Google.
-
-Código: "+(e.code||"erro"));
+        alert("Não foi possível entrar com Google.\n\nCódigo: "+(e.code||"erro"));
       }
     }
   }
@@ -852,7 +845,6 @@ Código: "+(e.code||"erro"));
   window.fintraFirebase={app,auth,db,googleProvider,signInWithPopup,signInWithRedirect,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut,sendLocalToCloud,loadCloudToLocal};
 
   window.addEventListener("load",()=>{
-    $("firebaseBtn")?.addEventListener("click",()=>openModal("firebaseModal"));
     $("googleLoginBtn")?.addEventListener("click",doGoogle);
     $("firebaseEmailLogin")?.addEventListener("click",doEmailLogin);
     $("firebaseEmailCreate")?.addEventListener("click",doCreate);
