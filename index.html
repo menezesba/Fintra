@@ -669,5 +669,28 @@ if("webkitSpeechRecognition" in window || "SpeechRecognition" in window){
 buildCategories();render();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{}))}
 </script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDLiirldZRpbyz3i6XCzDr4iMKqkXEl318",
+    authDomain: "fintra-d9414.firebaseapp.com",
+    projectId: "fintra-d9414",
+    storageBucket: "fintra-d9414.firebasestorage.app",
+    messagingSenderId: "728683899853",
+    appId: "1:728683899853:web:c5cf74dc053172a125f284",
+    measurementId: "G-LVFWTR92EJ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  </script>
 </body>
 </html>
