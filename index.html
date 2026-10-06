@@ -777,12 +777,19 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
 
   async function sendLocalToCloud(force=false){
     if(!currentUser){alert("Entre primeiro na sua conta Firebase.");return;}
-    const snap=await getDoc(cloudRef());
-    if(snap.exists() && !force){
-      if(!confirm("Já existem dados desta conta no Firebase. Deseja SUBSTITUIR os dados da nuvem pelos dados deste aparelho?\n\nAntes disso, faça um backup se quiser manter uma cópia."))return;
+    try{
+      const snap=await getDoc(cloudRef());
+      if(snap.exists() && !force){
+        if(!confirm("Já existem dados desta conta no Firebase. Deseja SUBSTITUIR os dados da nuvem pelos dados deste aparelho?\n\nAntes disso, faça um backup se quiser manter uma cópia."))return;
+      }
+      const ok=await writeCloud();
+      if(ok)alert("Dados deste aparelho enviados para o Firebase com sucesso.\n\nAgora podemos abrir a Fintra no tablet e carregar esses mesmos dados.");
+    }catch(e){
+      console.error("Erro ao enviar dados para o Firebase",e);
+      const code=e?.code||"erro-desconhecido";
+      setStatus("❌ Erro ao verificar/gravar os dados no Firebase.<br><small>Código: "+code+"</small>");
+      alert("Não foi possível enviar os dados deste aparelho para o Firebase.\n\nCódigo: "+code+"\n\nNão apague seus dados locais. Vamos corrigir a conexão antes de tentar novamente.");
     }
-    const ok=await writeCloud();
-    if(ok)alert("Dados deste aparelho enviados para o Firebase com sucesso.\n\nAgora podemos abrir a Fintra no tablet e carregar esses mesmos dados.");
   }
 
   async function loadCloudToLocal(){
