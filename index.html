@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071a2b">
-<title>Fintra v2.9</title>
+<title>Fintra v2.9.1</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
@@ -204,20 +204,14 @@ main{padding:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ca
    </div>
    <div style="display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;margin:6px 0 10px"><span style="height:1px;background:var(--line);flex:1"></span>ou e-mail e senha<span style="height:1px;background:var(--line);flex:1"></span></div>
    <div class="field"><label>E-mail</label><input id="firebaseEmail" type="email" autocomplete="email" placeholder="seu@email.com"></div>
-   <div class="field"><label>Senha</label>
-    <div style="position:relative">
-      <input id="firebasePassword" type="password" autocomplete="current-password" placeholder="Sua senha" style="padding-right:88px">
-      <button type="button" id="toggleFirebasePassword" aria-label="Mostrar senha" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:700;padding:8px;cursor:pointer">👁️ Mostrar</button>
-    </div>
-   </div>
-   <div id="firebaseLoginError" style="display:none;margin:8px 0 10px;padding:10px 12px;border-radius:12px;background:#fff0f0;color:#a52828;font-size:13px;text-align:left"></div>
+   <div class="field"><label>Senha</label><div style="position:relative"><input id="firebasePassword" type="password" autocomplete="current-password" placeholder="Sua senha" style="padding-right:78px"><button type="button" id="toggleFirebasePassword" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);font-weight:800;padding:6px">👁️ Mostrar</button></div></div>
    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
     <button type="button" class="save" id="firebaseEmailLogin" style="margin-top:0">Entrar</button>
     <button type="button" class="save" id="firebaseEmailCreate" style="margin-top:0;background:#0d6b72">Criar conta</button>
    </div>
   </div>
   <div id="firebaseActions" style="display:none">
-   <div class="card" style="text-align:left;margin-bottom:10px"><strong id="firebaseUserEmail">Conta conectada</strong><small id="firebaseUserUid" style="display:block;margin-top:4px"></small></div>
+   <div class="card" style="text-align:left;margin-bottom:10px"><strong id="firebaseUserEmail">Conta conectada</strong><small style="display:block;margin-top:4px">✅ Conta autenticada</small></div>
    <button type="button" class="save" id="firebaseSendBtn">☁️ Enviar dados deste aparelho para o Firebase</button>
    <button type="button" class="save" id="firebaseLoadBtn" style="background:#0d6b72">⬇️ Carregar dados do Firebase neste aparelho</button>
    <button type="button" class="save" id="firebaseSyncBtn" style="background:#071a2b">🔄 Sincronizar agora</button>
@@ -708,13 +702,6 @@ window.replaceFintraData=(remote)=>{data=JSON.parse(JSON.stringify(remote));if(!
 buildCategories();render();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{}))}
 </script>
-  <script>
-  // Abre a janela do Firebase independentemente do carregamento do módulo Firebase.
-  window.addEventListener("DOMContentLoaded",()=>{
-    const firebaseBtn=document.getElementById("firebaseBtn");
-    if(firebaseBtn) firebaseBtn.addEventListener("click",()=>openModal("firebaseModal"));
-  });
-  </script>
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
@@ -768,11 +755,11 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
     if(!currentUser || syncBusy || syncLoading)return false;
     syncBusy=true;
     try{
-      await setDoc(cloudRef(),{data:localPayload(),appVersion:"2.9",updatedAt:serverTimestamp()},{merge:true});
+      await setDoc(cloudRef(),{data:localPayload(),appVersion:"2.9.1",updatedAt:serverTimestamp()},{merge:true});
       setStatus("☁️ Dados sincronizados com o Firebase.",true);
       return true;
     }catch(e){
-      console.error(e);setStatus("❌ Não foi possível sincronizar agora.<br><small>Verifique sua conexão e as regras do Firestore.</small>");return false;
+      console.error(e);setStatus("❌ Erro ao sincronizar.<br><small><b>"+(e.code||"erro-desconhecido")+"</b>: "+(e.message||"Não foi possível gravar no Firebase.")+"</small>");return false;
     }finally{syncBusy=false;}
   }
   window.fintraSyncSchedule=()=>{
@@ -783,28 +770,33 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
 
   async function sendLocalToCloud(force=false){
     if(!currentUser){alert("Entre primeiro na sua conta Firebase.");return;}
-    try{
-      const snap=await getDoc(cloudRef());
-      if(snap.exists() && !force){
-        if(!confirm("Já existem dados desta conta no Firebase. Deseja SUBSTITUIR os dados da nuvem pelos dados deste aparelho?\n\nAntes disso, faça um backup se quiser manter uma cópia."))return;
-      }
-      const ok=await writeCloud();
-      if(ok)alert("Dados deste aparelho enviados para o Firebase com sucesso.\n\nAgora podemos abrir a Fintra no tablet e carregar esses mesmos dados.");
-    }catch(e){
-      console.error("Erro ao enviar dados para o Firebase",e);
-      const code=e?.code||"erro-desconhecido";
-      setStatus("❌ Erro ao verificar/gravar os dados no Firebase.<br><small>Código: "+code+"</small>");
-      alert("Não foi possível enviar os dados deste aparelho para o Firebase.\n\nCódigo: "+code+"\n\nNão apague seus dados locais. Vamos corrigir a conexão antes de tentar novamente.");
+    let snap;
+    try{ snap=await getDoc(cloudRef()); }
+    catch(e){ console.error(e); setStatus("❌ Erro ao acessar o Firestore.<br><small><b>"+(e.code||"erro-desconhecido")+"</b>: "+(e.message||"Não foi possível ler os dados da nuvem.")+"</small>"); return; }
+    if(snap.exists() && !force){
+      if(!confirm("Já existem dados desta conta no Firebase. Deseja SUBSTITUIR os dados da nuvem pelos dados deste aparelho?
+
+Antes disso, faça um backup se quiser manter uma cópia."))return;
     }
+    const ok=await writeCloud();
+    if(ok)alert("Dados deste aparelho enviados para o Firebase com sucesso.
+
+Agora podemos abrir a Fintra no tablet e carregar esses mesmos dados.");
   }
 
   async function loadCloudToLocal(){
     if(!currentUser){alert("Entre primeiro na sua conta Firebase.");return;}
-    const snap=await getDoc(cloudRef());
+    let snap;
+    try{ snap=await getDoc(cloudRef()); }
+    catch(e){ console.error(e); setStatus("❌ Erro ao ler o Firestore.<br><small><b>"+(e.code||"erro-desconhecido")+"</b>: "+(e.message||"Não foi possível ler os dados da nuvem.")+"</small>"); return; }
     if(!snap.exists()){alert("Ainda não há dados salvos no Firebase para esta conta. Primeiro envie os dados deste aparelho.");return;}
     const remote=snap.data()?.data;
     if(!remote || !Array.isArray(remote.transactions)){alert("Os dados encontrados no Firebase não têm um formato válido de Fintra.");return;}
-    if(!confirm("Isso substituirá os dados atualmente neste aparelho pelos dados do Firebase.\n\nRecomendo fazer um backup local antes.\n\nDeseja continuar?"))return;
+    if(!confirm("Isso substituirá os dados atualmente neste aparelho pelos dados do Firebase.
+
+Recomendo fazer um backup local antes.
+
+Deseja continuar?"))return;
     syncLoading=true;
     try{
       window.replaceFintraData(remote);
@@ -814,92 +806,37 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
     }finally{syncLoading=false;}
   }
 
-  function clearLoginError(){
-    const el=$("firebaseLoginError");
-    if(el){el.style.display="none";el.textContent="";}
-  }
-  function showLoginError(message){
-    const el=$("firebaseLoginError");
-    if(el){el.textContent=message;el.style.display="block";}
-    setStatus("❌ "+message);
-  }
-  function friendlyAuthError(e, action="login"){
-    const code=e?.code||"";
-    const map={
-      "auth/invalid-email":"O e-mail informado não é válido.",
-      "auth/user-not-found":"Não existe uma conta com este e-mail.",
-      "auth/wrong-password":"A senha está incorreta.",
-      "auth/invalid-credential":"E-mail ou senha incorretos.",
-      "auth/too-many-requests":"Muitas tentativas. Aguarde alguns minutos e tente novamente.",
-      "auth/user-disabled":"Esta conta foi desativada.",
-      "auth/email-already-in-use":"Este e-mail já está cadastrado. Tente entrar em vez de criar uma nova conta.",
-      "auth/weak-password":"A senha precisa ter pelo menos 6 caracteres.",
-      "auth/popup-blocked":"O navegador bloqueou a janela do Google.",
-      "auth/popup-closed-by-user":"A janela do Google foi fechada antes da conclusão do login.",
-      "auth/cancelled-popup-request":"O login do Google foi cancelado pelo navegador. Vamos usar o modo de redirecionamento.",
-      "auth/account-exists-with-different-credential":"Este e-mail já possui uma conta no Fintra com outro método de login. Entre primeiro com e-mail e senha para vincular o Google depois."
-    };
-    return map[code] || (action==="create" ? "Não foi possível criar a conta." : "Não foi possível entrar. Verifique seus dados.");
-  }
   async function doEmailLogin(){
-    clearLoginError();
     const email=$("firebaseEmail").value.trim(); const pass=$("firebasePassword").value;
-    if(!email||!pass){showLoginError("Informe o e-mail e a senha.");return;}
-    const btn=$("firebaseEmailLogin");
-    if(btn){btn.disabled=true;btn.textContent="Entrando...";}
-    try{
-      await signInWithEmailAndPassword(auth,email,pass);
-      clearLoginError();
-    }catch(e){
-      console.error("Erro no login por e-mail",e);
-      showLoginError(friendlyAuthError(e,"login")+"\n\nCódigo: "+(e.code||"erro"));
-    }finally{
-      if(btn){btn.disabled=false;btn.textContent="Entrar";}
-    }
+    if(!email||!pass){alert("Informe e-mail e senha.");return;}
+    try{await signInWithEmailAndPassword(auth,email,pass);}
+    catch(e){console.error(e);alert("Não foi possível entrar. Verifique o e-mail e a senha.
+
+Código: "+(e.code||"erro"));}
   }
   async function doCreate(){
-    clearLoginError();
     const email=$("firebaseEmail").value.trim(); const pass=$("firebasePassword").value;
-    if(!email){showLoginError("Informe um e-mail.");return;}
-    if(pass.length<6){showLoginError("A senha precisa ter pelo menos 6 caracteres.");return;}
-    const btn=$("firebaseEmailCreate");
-    if(btn){btn.disabled=true;btn.textContent="Criando...";}
-    try{
-      await createUserWithEmailAndPassword(auth,email,pass);
-      clearLoginError();
-    }catch(e){
-      console.error("Erro ao criar conta",e);
-      showLoginError(friendlyAuthError(e,"create")+"\n\nCódigo: "+(e.code||"erro"));
-    }finally{
-      if(btn){btn.disabled=false;btn.textContent="Criar conta";}
-    }
-  }
-  function isMobileBrowser(){
-    return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||"");
+    if(!email||pass.length<6){alert("Informe um e-mail e uma senha com pelo menos 6 caracteres.");return;}
+    try{await createUserWithEmailAndPassword(auth,email,pass);}
+    catch(e){console.error(e);alert("Não foi possível criar a conta.
+
+Código: "+(e.code||"erro"));}
   }
   async function doGoogle(){
-    clearLoginError();
-    const btn=$("googleLoginBtn");
-    if(btn){btn.disabled=true;btn.style.opacity=".65";}
     try{
-      // No celular, o redirecionamento é mais confiável do que popup.
-      if(isMobileBrowser()){
-        await signInWithRedirect(auth,googleProvider);
-        return;
-      }
+      const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if(mobile){ await signInWithRedirect(auth,googleProvider); return; }
       await signInWithPopup(auth,googleProvider);
-    }catch(e){
-      console.warn("Login Google falhou",e);
-      if(e.code==="auth/popup-blocked" || e.code==="auth/operation-not-supported-in-this-environment" || e.code==="auth/cancelled-popup-request"){
-        try{await signInWithRedirect(auth,googleProvider);return;}catch(er){
-          console.error("Redirecionamento Google falhou",er);
-          showLoginError(friendlyAuthError(er,"google")+"\n\nCódigo: "+(er.code||"erro"));
-        }
-      }else{
-        showLoginError(friendlyAuthError(e,"google")+"\n\nCódigo: "+(e.code||"erro"));
+    }
+    catch(e){
+      console.warn("Popup Google falhou",e);
+      if(e.code==="auth/popup-blocked" || e.code==="auth/operation-not-supported-in-this-environment"){
+        try{await signInWithRedirect(auth,googleProvider);}catch(er){alert("Não foi possível abrir o login do Google.");}
+      }else if(e.code!=="auth/popup-closed-by-user"){
+        alert("Não foi possível entrar com Google.
+
+Código: "+(e.code||"erro"));
       }
-    }finally{
-      if(btn){btn.disabled=false;btn.style.opacity="1";}
     }
   }
 
@@ -910,7 +847,6 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
       $("firebaseLoginArea").style.display="none";
       $("firebaseActions").style.display="block";
       $("firebaseUserEmail").textContent=user.email||"Conta Google";
-      $("firebaseUserUid").textContent="UID: "+user.uid;
       setStatus("✅ Conta conectada. Escolha uma ação abaixo.",true);
     }else{
       $("firebaseLoginArea").style.display="block";
@@ -918,28 +854,16 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
       setStatus("Não conectado ao Firebase.");
     }
   });
-  getRedirectResult(auth).then(result=>{
-    if(result?.user){setStatus("✅ Login Google concluído. Conta conectada.",true);}
-  }).catch(e=>{
-    if(e){
-      console.error("Resultado do redirecionamento Google",e);
-      setStatus("❌ "+friendlyAuthError(e,"google")+"<br><small>Código: "+(e.code||"erro")+"</small>");
-    }
-  });
+  getRedirectResult(auth).catch(()=>{});
 
   window.fintraFirebase={app,auth,db,googleProvider,signInWithPopup,signInWithRedirect,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut,sendLocalToCloud,loadCloudToLocal};
 
   window.addEventListener("load",()=>{
+    $("firebaseBtn")?.addEventListener("click",()=>openModal("firebaseModal"));
     $("googleLoginBtn")?.addEventListener("click",doGoogle);
     $("firebaseEmailLogin")?.addEventListener("click",doEmailLogin);
     $("firebaseEmailCreate")?.addEventListener("click",doCreate);
-    $("toggleFirebasePassword")?.addEventListener("click",()=>{
-      const input=$("firebasePassword"); const btn=$("toggleFirebasePassword");
-      if(!input)return;
-      const visible=input.type==="text";
-      input.type=visible?"password":"text";
-      if(btn){btn.textContent=visible?"👁️ Mostrar":"🙈 Ocultar";btn.setAttribute("aria-label",visible?"Mostrar senha":"Ocultar senha");}
-    });
+    $("toggleFirebasePassword")?.addEventListener("click",()=>{const p=$("firebasePassword"),b=$("toggleFirebasePassword");if(!p)return;const show=p.type==="password";p.type=show?"text":"password";b.textContent=show?"🙈 Ocultar":"👁️ Mostrar";});
     $("firebaseSendBtn")?.addEventListener("click",()=>sendLocalToCloud(false));
     $("firebaseLoadBtn")?.addEventListener("click",loadCloudToLocal);
     $("firebaseSyncBtn")?.addEventListener("click",()=>writeCloud().then(ok=>{if(ok)alert("Sincronização concluída.")}));
